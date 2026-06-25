@@ -1,1 +1,108 @@
-<p>home works!</p>
+<div class="bg-sky-900 text-white min-h-[75vh] py-12 flex flex-col items-center justify-center gap-8 px-4 text-center">
+
+    
+    <p-chip 
+        icon="pi pi-star-fill !text-amber-400" 
+        Class="bg-sky-900/50! text-sky-200! border! border-sky-700/50! px-4 py-2 text-sm font-semibold tracking-wide backdrop-blur-sm"
+        label="+491 empleos nuevos esta semana">
+    </p-chip>
+
+    <div class="space-y-2">
+        <h1 class="text-5xl md:text-7xl font-black tracking-tight block">
+            Encuentra el empleo
+        </h1>
+        <span class="text-5xl md:text-7xl text-[#3CE2BE] font-black tracking-tight block drop-shadow-[0_2px_10px_rgba(60,226,190,0.2)]">
+            perfecto para ti
+        </span>
+    </div>
+
+   
+    <p class="text-gray-300 text-lg md:text-xl max-w-2xl font-light leading-relaxed">
+        Conectamos el mejor talento con las mejores empresas del Perú. 
+        <span class="block md:inline font-normal text-white">Más de 10,000 oportunidades te esperan.</span>
+    </p>
+
+    
+    <div class="flex flex-col md:flex-row items-center gap-2 bg-white p-2 rounded-2xl md:rounded-full shadow-2xl w-full max-w-4xl border border-gray-100">
+        
+        
+        <div class="w-full flex-1">
+            <p-iconfield>
+                <p-inputicon class="pi pi-search text-gray-400!" />
+                <input pInputText 
+                       [(ngModel)]="value1" 
+                       placeholder="Cargo, empresa o habilidad..." 
+                       class="w-full border-0! p-3! pl-10! text-gray-800! focus:ring-0! placeholder:text-gray-400 text-sm" />
+            </p-iconfield>
+        </div>
+
+      
+        <div class="hidden md:block h-8 w-px bg-gray-200"></div>
+
+    
+        <div class="w-full flex-1">
+            <p-iconfield>
+                <p-inputicon class="pi pi-map-marker text-gray-400!" />
+                <input pInputText 
+                       [(ngModel)]="value1" 
+                       placeholder="Ubicación (Ej. Lima)" 
+                       class="w-full border-0! p-3! pl-10! text-gray-800! focus:ring-0! placeholder:text-gray-400 text-sm" />
+            </p-iconfield>
+        </div>
+
+      
+       <p-button 
+            icon="pi pi-search" 
+            label="Buscar" 
+            styleClass="!bg-[#3CE2BE] !text-white !border-0 !px-8 !py-3 !font-bold !rounded-xl md:!rounded-full hover:!bg-[#2ecbad] transition-all w-full md:w-auto" />
+    </div>
+
+    
+    <div class="flex flex-wrap items-center justify-center gap-2 mt-2 text-sm">
+        <span class="text-gray-400 font-medium mr-1">Más buscado:</span>
+        
+        <p-chip label="Developer" Class="bg-sky-900/30! text-white! border! border-sky-700/50! hover:bg-sky-800/50! cursor-pointer transition-colors text-xs" />
+        <p-chip label="Marketing"  Class="bg-sky-900/30! text-white! border! border-sky-700/50! hover:bg-sky-800/50!cursor-pointer transition-colors text-xs" />
+        <p-chip label="Diseño UX"  Class="bg-sky-900/30! text-white! border! border-sky-700/50! hover:bg-sky-800/50! cursor-pointer transition-colors text-xs" />
+        <p-chip label="Finanzas"  Class="bg-sky-900/30! text-white! border! border-sky-700/50! hover:bg-sky-800/50! cursor-pointer transition-colors text-xs" />
+        <p-chip label="Remoto" Class="bg-[#3CE2BE]/10! text-[#3CE2BE]! border! border-[#3CE2BE]/30! hover:bg-[#3CE2BE]/20! cursor-pointer transition-colors text-xs" />
+    </div>
+
+   
+
+</div>
+ <div class="bg-sky-950 w-full flex text-white items-center justify-center p-10 space-x-20">
+
+        <div class="flex flex-col">
+            <span class="text-green-600 text-4xl font-bold">
+                 12,480+
+            </span>
+            <span>
+                 Empleos disponibles
+            </span>
+        </div>
+       <div class="flex flex-col">
+            <span class="text-green-600 text-4xl font-bold">
+                2,340+
+            </span>
+            <span>
+                Empresas registradas
+            </span>
+        </div>
+        <div class="flex flex-col">
+            <span class="text-green-600 text-4xl font-bold">
+                85,000+
+            </span>
+            <span>
+                 Postulantes activos
+            </span>
+        </div>
+         <div class="flex flex-col">
+            <span class="text-green-600 text-4xl font-bold">
+                 94%
+            </span>
+            <span>
+                 Tasa de satisfacción
+            </span>
+        </div>
+    </div>
