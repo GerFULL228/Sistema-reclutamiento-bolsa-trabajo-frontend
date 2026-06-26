@@ -1,0 +1,10 @@
+.icono-con-fondo {
+  background-color: #ff5722; 
+  color: #ffffff;            
+  padding: 10px;             
+  border-radius: 50%;        
+  font-size: 1.5rem;         
+  display: inline-flex;      
+  align-items: center;
+  justify-content: center;
+}
