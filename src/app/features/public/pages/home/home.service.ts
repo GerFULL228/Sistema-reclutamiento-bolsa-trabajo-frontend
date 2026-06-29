@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
@@ -8,8 +8,9 @@ import { catchError, map } from 'rxjs/operators';
 })
 export class HomeService {
   private readonly baseUrl = 'http://localhost:8080/api';
-
-  constructor(private http: HttpClient) {}
+  
+  
+  private http = inject(HttpClient); 
 
   private getAuthHeaders(): HttpHeaders {
     const token = localStorage.getItem('accessToken');
@@ -21,7 +22,6 @@ export class HomeService {
 
   /**
    * Login de usuario.
-   * Endpoint: POST /api/auth/login
    */
   login(credentials: { email: string; password: string }): Observable<any> {
     return this.http.post(`${this.baseUrl}/auth/login`, credentials, { headers: this.getAuthHeaders() });
@@ -29,7 +29,6 @@ export class HomeService {
 
   /**
    * Registro de postulante.
-   * Endpoint: POST /api/usuarios/postulante/register
    */
   registerPostulante(payload: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/usuarios/postulante/register`, payload, { headers: this.getAuthHeaders() });
@@ -37,7 +36,6 @@ export class HomeService {
 
   /**
    * Obtiene ofertas públicas.
-   * Endpoint: GET /api/ofertas/public
    */
   getFeaturedOffers(page: number = 0, size: number = 5): Observable<any[]> {
     const params = new HttpParams().set('page', page.toString()).set('size', size.toString());

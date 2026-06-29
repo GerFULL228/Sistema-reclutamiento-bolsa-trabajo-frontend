@@ -1,51 +1,34 @@
-<section class="page-shell">
-  <div class="hero-panel">
-    <div class="hero-copy">
-      <p class="eyebrow">Aliados estratégicos</p>
-      <h1>Empresas que contratan con propósito y visión de futuro</h1>
-      <p>Conectamos a organizaciones con perfiles preparados para aportar valor, crecer en equipos ágiles y transformar su negocio con solidez.</p>
-      <div class="hero-actions">
-        <a routerLink="/contacto" class="btn-primary">Hablar con nuestro equipo</a>
-        <a routerLink="/empleos" class="btn-secondary">Ver vacantes</a>
-      </div>
-    </div>
-  </div>
-
-  <div class="content-section">
-    <div class="section-heading">
-      <h2>Organizaciones que confían en TalentHub</h2>
-      <p>Empresas líderes en tecnología, educación, sostenibilidad y servicios que buscan talento comprometido.</p>
+<section class="page-shell py-16" style="background-color: #f9fafb; min-height: 100vh;">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <div class="text-center mb-14">
+      <h1 class="text-4xl font-bold" style="color: #1e5f74;">Directorio de Empresas</h1>
+      <p class="mt-4 text-gray-600 max-w-2xl mx-auto">Conoce a las empresas líderes que confían en TalentHub para encontrar al mejor talento del mercado.</p>
     </div>
 
-    <div class="card-grid">
-      <article class="info-card" *ngFor="let company of featuredCompanies">
-        <h3>{{ company.name }}</h3>
-        <p class="pill">{{ company.sector }}</p>
-        <p class="meta">{{ company.location }}</p>
-        <p>{{ company.description }}</p>
-      </article>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      @for (empresa of listaEmpresas; track empresa.nombre) {
+        <div class="bg-white rounded-xl shadow-md border border-gray-100 p-6 flex flex-col items-center text-center hover:shadow-xl transition-shadow cursor-pointer">
+          <div class="w-16 h-16 rounded-full flex items-center justify-center mb-4 bg-gray-50" style="color: #1e5f74;">
+            <i class="pi {{empresa.icono}} text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-1">{{ empresa.nombre }}</h3>
+          <p class="text-sm font-medium text-gray-500 mb-4">{{ empresa.sector }}</p>
+          
+          <div class="w-full bg-gray-50 p-3 rounded-lg flex justify-between items-center mt-auto">
+            <span class="text-xs text-gray-600"><i class="pi pi-map-marker mr-1"></i>{{ empresa.ubicacion }}</span>
+            <span class="text-xs font-bold px-2 py-1 rounded bg-green-100 text-green-800">{{ empresa.ofertasActivas }} ofertas</span>
+          </div>
+        </div>
+      }
     </div>
-  </div>
 
-  <div class="content-section benefits-section">
-    <div class="section-heading">
-      <h2>¿Por qué trabajar con nosotros?</h2>
-      <p>Una plataforma diseñada para hacer más eficiente el proceso de reclutamiento y selección.</p>
-    </div>
-
-    <div class="benefits-grid">
-      <div class="benefit-card">
-        <h3>Talento cualificado</h3>
-        <p>Accede a candidatos alineados con tus necesidades y con experiencia demostrada.</p>
-      </div>
-      <div class="benefit-card">
-        <h3>Proceso ágil</h3>
-        <p>Reduce tiempos de contratación con herramientas claras y comunicación efectiva.</p>
-      </div>
-      <div class="benefit-card">
-        <h3>Visibilidad real</h3>
-        <p>Presenta tus vacantes a perfiles activos, comprometidos y preparados para crecer.</p>
-      </div>
+    <div class="mt-12 text-center">
+      <p class="text-gray-500">¿Eres una empresa y deseas publicar vacantes?</p>
+      <button class="mt-4 border-2 font-bold py-2 px-6 rounded-lg transition-colors"
+              style="border-color: #1e5f74; color: #1e5f74;" routerLink="/registro">
+        Registrar mi empresa
+      </button>
     </div>
   </div>
 </section>

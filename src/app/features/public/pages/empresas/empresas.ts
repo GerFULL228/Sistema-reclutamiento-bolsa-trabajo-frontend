@@ -1,40 +1,20 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
-
-interface CompanyHighlight {
-  name: string;
-  sector: string;
-  location: string;
-  description: string;
-}
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-empresas',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule],
   templateUrl: './empresas.html',
   styleUrl: './empresas.css'
 })
-export class Companies {
-  featuredCompanies: CompanyHighlight[] = [
-    {
-      name: 'TechCorp S.A.',
-      sector: 'Tecnología',
-      location: 'Lima',
-      description: 'Impulsa productos digitales y transforma procesos de negocio con equipos ágiles.'
-    },
-    {
-      name: 'GreenWork',
-      sector: 'Sostenibilidad',
-      location: 'Trujillo',
-      description: 'Desarrolla soluciones de impacto para negocios con enfoque ambiental y social.'
-    },
-    {
-      name: 'NovaLabs',
-      sector: 'Innovación',
-      location: 'Cusco',
-      description: 'Acelera la adopción de tecnología y talento especializado en proyectos disruptivos.'
-    }
+export class Empresas {
+  listaEmpresas = [
+    { nombre: 'Tech Corp', sector: 'Tecnología', ubicacion: 'Lima, Perú', ofertasActivas: 12, icono: 'pi-server' },
+    { nombre: 'Banco Financiero', sector: 'Banca y Finanzas', ubicacion: 'Remoto', ofertasActivas: 8, icono: 'pi-building-columns' },
+    { nombre: 'Salud Integral', sector: 'Salud', ubicacion: 'Arequipa, Perú', ofertasActivas: 5, icono: 'pi-heart-fill' },
+    { nombre: 'Retail Global', sector: 'Comercio', ubicacion: 'Múltiples sedes', ofertasActivas: 20, icono: 'pi-shopping-cart' },
+    { nombre: 'Agencia Creativa', sector: 'Marketing', ubicacion: 'Remoto', ofertasActivas: 3, icono: 'pi-palette' },
+    { nombre: 'Logística Sur', sector: 'Transporte', ubicacion: 'Callao, Perú', ofertasActivas: 7, icono: 'pi-truck' }
   ];
 }

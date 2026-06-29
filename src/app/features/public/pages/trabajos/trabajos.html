@@ -1,64 +1,59 @@
-<section class="page-shell">
-  <div class="hero-panel">
-    <div class="hero-copy">
-      <p class="eyebrow">Oportunidades reales</p>
-      <h1>Trabajos que impulsan tu carrera profesional</h1>
-      <p>Explora vacantes seleccionadas para perfiles con experiencia, visión de crecimiento y ganas de aportar valor en equipos de alto rendimiento.</p>
-      <div class="hero-actions">
-        <a routerLink="/contacto" class="btn-primary">Solicitar asesoría</a>
-        <a routerLink="/home" class="btn-secondary">Volver al inicio</a>
+<section class="page-shell py-12" style="background-color: #f9fafb; min-height: 100vh;">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <div class="bg-white rounded-xl shadow-sm p-6 mb-10 border border-gray-100 flex flex-col md:flex-row justify-between items-center gap-4">
+      <div>
+        <h1 class="text-3xl font-bold" style="color: #1e5f74;">Explorar Ofertas</h1>
+        <p class="text-gray-500 text-sm mt-1">Encuentra el empleo que mejor se adapte a ti.</p>
       </div>
-    </div>
-    <div class="hero-stats">
-      <div class="stat-card" *ngFor="let item of heroStats">
-        <strong>{{ item.value }}</strong>
-        <span>{{ item.label }}</span>
+      <div class="w-full md:w-1/3 flex gap-2">
+        <input pInputText type="text" placeholder="Cargo o palabra clave" [(ngModel)]="criterioBusqueda" 
+               class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none" (keyup.enter)="filtrarEmpleos()"/>
+        <button class="text-white px-4 py-2 rounded-lg font-semibold" style="background-color: #1e5f74;" (click)="filtrarEmpleos()">
+          <i class="pi pi-search"></i>
+        </button>
       </div>
-    </div>
-  </div>
-
-  <div class="content-section">
-    <div class="section-heading">
-      <h2>Vacantes destacadas</h2>
-      <p>Ofertas cuidadosamente seleccionadas para acompañar tu crecimiento profesional.</p>
     </div>
 
-    <div class="card-grid">
-      <article class="info-card" *ngFor="let job of featuredJobs">
-        <div class="card-top">
-          <span class="pill">{{ job.modality }}</span>
-          <span class="muted">{{ job.type }}</span>
-        </div>
-        <h3>{{ job.title }}</h3>
-        <p class="company">{{ job.company }}</p>
-        <p class="meta">{{ job.location }}</p>
-        <p class="salary">{{ job.salary }}</p>
-      </article>
-    </div>
-  </div>
+    @if (cargando) {
+      <div class="flex justify-center items-center py-20">
+        <i class="pi pi-spin pi-spinner text-4xl" style="color: #1e5f74;"></i>
+      </div>
+    } @else {
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        @for (job of listaOfertas; track job.id) {
+          <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col justify-between h-full">
+            <div>
+              <div class="flex items-center gap-3 mb-4">
+                <div class="bg-blue-50 p-3 rounded-lg" style="color: #1e5f74;">
+                  <i class="pi pi-briefcase text-xl"></i>
+                </div>
+                <div>
+                  <h3 class="font-bold text-lg text-gray-900 leading-tight">{{ job.title }}</h3>
+                  <p class="text-sm font-medium" style="color: #1e5f74;">{{ job.company }}</p>
+                </div>
+              </div>
+              
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span class="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded-full"><i class="pi pi-map-marker mr-1"></i>{{ job.location }}</span>
+                <span class="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded-full"><i class="pi pi-desktop mr-1"></i>{{ job.modality || 'Remoto' }}</span>
+              </div>
+            </div>
 
-  <div class="content-section process-section">
-    <div class="section-heading">
-      <h2>Cómo participar</h2>
-      <p>Un proceso simple, claro y orientado a resultados.</p>
-    </div>
-
-    <div class="steps-grid">
-      <div class="step-card">
-        <span>01</span>
-        <h3>Regístrate</h3>
-        <p>Completa tu perfil con experiencia, habilidades y preferencias.</p>
+            <div class="mt-4 pt-4 border-t border-gray-100 flex justify-between items-center">
+              <span class="font-bold text-gray-800">{{ job.salary }}</span>
+              <button class="font-semibold hover:underline text-sm flex items-center gap-1" style="color: #1e5f74;">
+                Postular <i class="pi pi-arrow-right text-xs"></i>
+              </button>
+            </div>
+          </div>
+        } @empty {
+          <div class="col-span-full text-center py-16 text-gray-500 bg-white border border-gray-100 rounded-xl shadow-sm">
+            <i class="pi pi-folder-open text-4xl mb-3"></i>
+            <p class="text-lg">No encontramos ofertas laborales con esa búsqueda.</p>
+          </div>
+        }
       </div>
-      <div class="step-card">
-        <span>02</span>
-        <h3>Explora oportunidades</h3>
-        <p>Revisa vacantes por área, ubicación y modalidad de trabajo.</p>
-      </div>
-      <div class="step-card">
-        <span>03</span>
-        <h3>Postula con confianza</h3>
-        <p>Envía tu candidatura y mantente informado en cada etapa del proceso.</p>
-      </div>
-    </div>
+    }
   </div>
 </section>

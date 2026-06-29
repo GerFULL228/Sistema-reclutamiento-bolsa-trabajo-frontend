@@ -1,54 +1,48 @@
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
-
-interface JobOffer {
-  title: string;
-  company: string;
-  location: string;
-  salary: string;
-  modality: string;
-  type: string;
-}
+import { FormsModule } from '@angular/forms';
+import { InputTextModule } from 'primeng/inputtext';
+import { HomeService } from '../home/home.service'; 
 
 @Component({
   selector: 'app-trabajos',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, FormsModule, InputTextModule],
   templateUrl: './trabajos.html',
   styleUrl: './trabajos.css'
 })
-export class Jobs {
-  heroStats = [
-    { value: '1,200+', label: 'Vacantes activas' },
-    { value: '24h', label: 'Respuesta promedio' },
-    { value: '94%', label: 'Satisfacción' }
-  ];
+export class Trabajos implements OnInit {
+  private ofertasService = inject(HomeService);
 
-  featuredJobs: JobOffer[] = [
-    {
-      title: 'Senior Frontend Developer',
-      company: 'TechCorp S.A.',
-      location: 'Lima, Perú',
-      salary: 'S/ 8,000 - 12,000',
-      modality: 'Remoto',
-      type: 'Tiempo completo'
-    },
-    {
-      title: 'Analista de Datos',
-      company: 'DataFlow',
-      location: 'Arequipa, Perú',
-      salary: 'S/ 5,500 - 7,500',
-      modality: 'Híbrido',
-      type: 'Tiempo completo'
-    },
-    {
-      title: 'Especialista UX/UI',
-      company: 'Creative Studio',
-      location: 'Lima, Perú',
-      salary: 'S/ 4,500 - 6,500',
-      modality: 'Presencial',
-      type: 'Contrato'
-    }
-  ];
+  listaOfertas: any[] = [];
+  cargando: boolean = true;
+  criterioBusqueda: string = '';
+
+  ngOnInit() {
+    this.cargarTodasLasOfertas();
+  }
+
+  cargarTodasLasOfertas() {
+    this.cargando = true;
+    // Traemos 20 ofertas para esta página completa
+    this.ofertasService.getFeaturedOffers(0, 20).subscribe({
+      next: (data) => {
+        this.listaOfertas = data;
+        this.cargando = false;
+      },
+      error: () => {
+        this.cargando = false;
+      }
+    });
+  }
+
+  filtrarEmpleos() {
+    this.cargando = true;
+    this.ofertasService.searchOffers({ position: this.criterioBusqueda }, 0, 20).subscribe({
+      next: (data) => {
+        this.listaOfertas = data;
+        this.cargando = false;
+      }
+    });
+  }
 }
