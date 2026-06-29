@@ -1,27 +1,34 @@
-<header class="flex items-center justify-between w-full px-2 sm:px-4 lg:px-6 xl:px-8 py-3 bg-white shadow">
+<header [class.header-hidden]="!isHeaderVisible" class="header-shell">
+  <div class="header-container">
+    <div class="header-brand" routerLink="/home">
+      <span class="brand-primary">Talent</span><span class="brand-secondary">Hub</span>
+    </div>
 
-  
-  <div class="flex items-center gap-8">
-
-
-    <a routerLink="/home" class="flex items-center gap-3">
-      <span class="text-white bg-green-400 rounded-2xl text-2xl p-2 flex items-center justify-center">
-        <i class="pi pi-briefcase"></i>
-      </span>
-    </a>
-
-  
-    <nav class="flex gap-6 text-gray-700 font-medium">
-      <a routerLink="/empleos" class="hover:text-green-500 transition">Empleos</a>
-      <a routerLink="/empresas" class="hover:text-green-500 transition">Empresas</a>
+    <nav class="desktop-nav">
+      <a routerLink="/home" class="nav-link" (click)="closeMenu()">Inicio</a>
+      <a routerLink="/empleos" class="nav-link" (click)="closeMenu()">Empleos</a>
+      <a routerLink="/empresas" class="nav-link" (click)="closeMenu()">Empresas</a>
+      <a routerLink="/contacto" class="nav-link" (click)="closeMenu()">Contacto</a>
     </nav>
 
+    <div class="desktop-actions">
+      <a routerLink="/login" class="btn-outline" (click)="closeMenu()">Iniciar sesión</a>
+      <a routerLink="/registro" class="btn-solid" (click)="closeMenu()">Registrarse</a>
+    </div>
+
+    <button class="mobile-toggle" type="button" (click)="toggleMenu()" [attr.aria-expanded]="menuOpen" aria-label="Abrir menú">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
   </div>
 
-
-  <div class="flex items-center gap-3">
-    <p-button label="Login" styleClass="p-button-text"></p-button>
-    <p-button label="Registrarse"></p-button>
+  <div class="mobile-menu" [class.open]="menuOpen">
+    <a routerLink="/home" class="mobile-link" (click)="closeMenu()">Inicio</a>
+    <a routerLink="/empleos" class="mobile-link" (click)="closeMenu()">Empleos</a>
+    <a routerLink="/empresas" class="mobile-link" (click)="closeMenu()">Empresas</a>
+    <a routerLink="/contacto" class="mobile-link" (click)="closeMenu()">Contacto</a>
+    <a routerLink="/login" class="mobile-link mobile-action" (click)="closeMenu()">Iniciar sesión</a>
+    <a routerLink="/registro" class="mobile-link mobile-action primary" (click)="closeMenu()">Registrarse</a>
   </div>
-
 </header>

@@ -17,6 +17,7 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideAnimations(),
     provideRouter(routes),
+    provideHttpClient(withInterceptors([])),
      providePrimeNG({
       theme: {
         preset: Aura,
@@ -27,8 +28,6 @@ export const appConfig: ApplicationConfig = {
     }),
   
     MessageService,
-        ConfirmationService
-
-     
+    ConfirmationService
   ]
 };
