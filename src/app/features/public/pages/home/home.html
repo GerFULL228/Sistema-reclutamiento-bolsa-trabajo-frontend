@@ -16,19 +16,47 @@
 
       <!-- Descripción -->
       <p class="hero-description">
-        Conecta profesionales con empresas líderes y encuentra el empleo ideal. 
-        Varios profesionales ya confían en nosotros.
+        Conecta profesionales con empresas líderes y encuentra el empleo ideal. Más de 95,000 profesionales ya confían en nosotros.
       </p>
+
+      <!-- Buscador -->
+      <div class="search-card">
+        <div class="search-inputs">
+          <div class="search-field">
+            <label>Cargo</label>
+            <div class="field-inner">
+              <i class="pi pi-briefcase"></i>
+              <input pInputText type="text" placeholder="Ej. Analista de datos" [(ngModel)]="searchPosition" />
+            </div>
+          </div>
+          <div class="search-field">
+            <label>Ubicación</label>
+            <div class="field-inner">
+              <i class="pi pi-map-marker"></i>
+              <input pInputText type="text" placeholder="Ej. Lima" [(ngModel)]="searchLocation" />
+            </div>
+          </div>
+          <button class="btn btn-primary search-button" (click)="searchJobs()" [disabled]="loading">
+            <i class="pi pi-search"></i>
+            {{ loading ? 'Buscando...' : 'Buscar' }}
+          </button>
+        </div>
+
+        <div class="search-tags">
+          <span>Buscar rápido:</span>
+          <button type="button" class="tag-pill" *ngFor="let tag of searchTags" (click)="searchByTag(tag)">{{ tag }}</button>
+        </div>
+      </div>
 
       <!-- Botones -->
       <div class="hero-buttons">
-        <button class="btn btn-primary" (click)="navigateToJobs()">
-          <i class="pi pi-search"></i>
-          Buscar empleos
+        <button class="btn btn-secondary" (click)="navigateToJobs()">
+          <i class="pi pi-list"></i>
+          Ver ofertas
         </button>
-        <button class="btn btn-secondary" (click)="publishJob()">
-          <i class="pi pi-arrow-right"></i>
-          Publicar oferta laboral
+        <button class="btn btn-secondary" (click)="registerNow()">
+          <i class="pi pi-user"></i>
+          Crear cuenta
         </button>
       </div>
 
@@ -51,10 +79,7 @@
 
     <div class="hero-right">
       <div class="hero-image">
-        <div class="image-placeholder">
-            <img src="https://img.magnific.com/fotos-premium/grupo-empresarios-sentados-sillas-fila-trabajando-equipo-irreconocible-gadgets-comunicacion-concepto-tecnologias-modernas-espacio-copia_116547-5552.jpg?semt=ais_hybrid&w=740&q=80">
-        </div>
-              
+        <img src="https://img.magnific.com/fotos-premium/grupo-empresarios-sentados-sillas-fila-trabajando-equipo-irreconocible-gadgets-comunicacion-concepto-tecnologias-modernas-espacio-copia_116547-5552.jpg?semt=ais_hybrid&w=740&q=80" alt="Equipo de trabajo" />
       </div>
     </div>
   </div>

@@ -1,7 +1,8 @@
 import { Component, OnInit, HostListener } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink, NavigationEnd } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { CommonModule } from '@angular/common';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-header',
@@ -14,8 +15,18 @@ export class Header implements OnInit {
   isHeaderVisible: boolean = true;
   lastScrollTop: number = 0;
   menuOpen: boolean = false;
+  activeRoute: string = '/home';
 
-  ngOnInit(): void {}
+  constructor(private router: Router) {}
+
+  ngOnInit(): void {
+    this.router.events
+      .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
+      .subscribe((event: NavigationEnd) => {
+        const url = event.urlAfterRedirects || event.url;
+        this.activeRoute = url.split('?')[0] || '/home';
+      });
+  }
 
   toggleMenu(): void {
     this.menuOpen = !this.menuOpen;

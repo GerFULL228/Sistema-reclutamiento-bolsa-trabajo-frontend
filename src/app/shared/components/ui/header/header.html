@@ -5,10 +5,10 @@
     </div>
 
     <nav class="desktop-nav">
-      <a routerLink="/home" class="nav-link" (click)="closeMenu()">Inicio</a>
-      <a routerLink="/empleos" class="nav-link" (click)="closeMenu()">Empleos</a>
-      <a routerLink="/empresas" class="nav-link" (click)="closeMenu()">Empresas</a>
-      <a routerLink="/contacto" class="nav-link" (click)="closeMenu()">Contacto</a>
+      <a routerLink="/home" class="nav-link" [class.active]="activeRoute === '/home'" (click)="closeMenu()">Inicio</a>
+      <a routerLink="/empleos" class="nav-link" [class.active]="activeRoute === '/empleos'" (click)="closeMenu()">Empleos</a>
+      <a routerLink="/empresas" class="nav-link" [class.active]="activeRoute === '/empresas'" (click)="closeMenu()">Empresas</a>
+      <a routerLink="/contacto" class="nav-link" [class.active]="activeRoute === '/contacto'" (click)="closeMenu()">Contacto</a>
     </nav>
 
     <div class="desktop-actions">
@@ -24,11 +24,9 @@
   </div>
 
   <div class="mobile-menu" [class.open]="menuOpen">
-    <a routerLink="/home" class="mobile-link" (click)="closeMenu()">Inicio</a>
-    <a routerLink="/empleos" class="mobile-link" (click)="closeMenu()">Empleos</a>
-    <a routerLink="/empresas" class="mobile-link" (click)="closeMenu()">Empresas</a>
-    <a routerLink="/contacto" class="mobile-link" (click)="closeMenu()">Contacto</a>
-    <a routerLink="/login" class="mobile-link mobile-action" (click)="closeMenu()">Iniciar sesión</a>
-    <a routerLink="/registro" class="mobile-link mobile-action primary" (click)="closeMenu()">Registrarse</a>
+    <a routerLink="/home" class="mobile-link" [class.active]="activeRoute === '/home'" (click)="closeMenu()">Inicio</a>
+    <a routerLink="/empleos" class="mobile-link" [class.active]="activeRoute === '/empleos'" (click)="closeMenu()">Empleos</a>
+    <a routerLink="/empresas" class="mobile-link" [class.active]="activeRoute === '/empresas'" (click)="closeMenu()">Empresas</a>
+    <a routerLink="/contacto" class="mobile-link" [class.active]="activeRoute === '/contacto'" (click)="closeMenu()">Contacto</a>
   </div>
 </header>

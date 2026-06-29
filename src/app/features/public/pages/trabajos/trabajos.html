@@ -1,0 +1,64 @@
+<section class="page-shell">
+  <div class="hero-panel">
+    <div class="hero-copy">
+      <p class="eyebrow">Oportunidades reales</p>
+      <h1>Trabajos que impulsan tu carrera profesional</h1>
+      <p>Explora vacantes seleccionadas para perfiles con experiencia, visión de crecimiento y ganas de aportar valor en equipos de alto rendimiento.</p>
+      <div class="hero-actions">
+        <a routerLink="/contacto" class="btn-primary">Solicitar asesoría</a>
+        <a routerLink="/home" class="btn-secondary">Volver al inicio</a>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-card" *ngFor="let item of heroStats">
+        <strong>{{ item.value }}</strong>
+        <span>{{ item.label }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-section">
+    <div class="section-heading">
+      <h2>Vacantes destacadas</h2>
+      <p>Ofertas cuidadosamente seleccionadas para acompañar tu crecimiento profesional.</p>
+    </div>
+
+    <div class="card-grid">
+      <article class="info-card" *ngFor="let job of featuredJobs">
+        <div class="card-top">
+          <span class="pill">{{ job.modality }}</span>
+          <span class="muted">{{ job.type }}</span>
+        </div>
+        <h3>{{ job.title }}</h3>
+        <p class="company">{{ job.company }}</p>
+        <p class="meta">{{ job.location }}</p>
+        <p class="salary">{{ job.salary }}</p>
+      </article>
+    </div>
+  </div>
+
+  <div class="content-section process-section">
+    <div class="section-heading">
+      <h2>Cómo participar</h2>
+      <p>Un proceso simple, claro y orientado a resultados.</p>
+    </div>
+
+    <div class="steps-grid">
+      <div class="step-card">
+        <span>01</span>
+        <h3>Regístrate</h3>
+        <p>Completa tu perfil con experiencia, habilidades y preferencias.</p>
+      </div>
+      <div class="step-card">
+        <span>02</span>
+        <h3>Explora oportunidades</h3>
+        <p>Revisa vacantes por área, ubicación y modalidad de trabajo.</p>
+      </div>
+      <div class="step-card">
+        <span>03</span>
+        <h3>Postula con confianza</h3>
+        <p>Envía tu candidatura y mantente informado en cada etapa del proceso.</p>
+      </div>
+    </div>
+  </div>
+</section>

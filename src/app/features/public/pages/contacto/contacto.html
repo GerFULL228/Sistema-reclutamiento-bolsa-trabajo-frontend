@@ -1,0 +1,26 @@
+<section class="page-shell">
+  <div class="hero-panel">
+    <div class="hero-copy">
+      <p class="eyebrow">Contacto profesional</p>
+      <h1>Estamos listos para ayudarte a avanzar</h1>
+      <p>Si deseas publicar vacantes, consultar oportunidades o conversar sobre alianzas estratégicas, nuestro equipo estará encantado de apoyarte.</p>
+      <div class="hero-actions">
+        <a routerLink="/home" class="btn-primary">Volver al inicio</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-section contact-layout">
+    <div class="section-heading">
+      <h2>Canales de atención</h2>
+      <p>Escoge el canal más adecuado para tu consulta y recibiremos tu mensaje con la mayor agilidad.</p>
+    </div>
+
+    <div class="card-grid">
+      <article class="info-card" *ngFor="let option of contactOptions">
+        <h3>{{ option.title }}</h3>
+        <p>{{ option.detail }}</p>
+      </article>
+    </div>
+  </div>
+</section>

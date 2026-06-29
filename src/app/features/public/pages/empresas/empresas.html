@@ -1,0 +1,51 @@
+<section class="page-shell">
+  <div class="hero-panel">
+    <div class="hero-copy">
+      <p class="eyebrow">Aliados estratégicos</p>
+      <h1>Empresas que contratan con propósito y visión de futuro</h1>
+      <p>Conectamos a organizaciones con perfiles preparados para aportar valor, crecer en equipos ágiles y transformar su negocio con solidez.</p>
+      <div class="hero-actions">
+        <a routerLink="/contacto" class="btn-primary">Hablar con nuestro equipo</a>
+        <a routerLink="/empleos" class="btn-secondary">Ver vacantes</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-section">
+    <div class="section-heading">
+      <h2>Organizaciones que confían en TalentHub</h2>
+      <p>Empresas líderes en tecnología, educación, sostenibilidad y servicios que buscan talento comprometido.</p>
+    </div>
+
+    <div class="card-grid">
+      <article class="info-card" *ngFor="let company of featuredCompanies">
+        <h3>{{ company.name }}</h3>
+        <p class="pill">{{ company.sector }}</p>
+        <p class="meta">{{ company.location }}</p>
+        <p>{{ company.description }}</p>
+      </article>
+    </div>
+  </div>
+
+  <div class="content-section benefits-section">
+    <div class="section-heading">
+      <h2>¿Por qué trabajar con nosotros?</h2>
+      <p>Una plataforma diseñada para hacer más eficiente el proceso de reclutamiento y selección.</p>
+    </div>
+
+    <div class="benefits-grid">
+      <div class="benefit-card">
+        <h3>Talento cualificado</h3>
+        <p>Accede a candidatos alineados con tus necesidades y con experiencia demostrada.</p>
+      </div>
+      <div class="benefit-card">
+        <h3>Proceso ágil</h3>
+        <p>Reduce tiempos de contratación con herramientas claras y comunicación efectiva.</p>
+      </div>
+      <div class="benefit-card">
+        <h3>Visibilidad real</h3>
+        <p>Presenta tus vacantes a perfiles activos, comprometidos y preparados para crecer.</p>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,35 +1,44 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Button } from 'primeng/button';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { InputTextModule } from 'primeng/inputtext';
 import { ChipModule } from 'primeng/chip';
 import { BadgeModule } from 'primeng/badge';
+import { HomeService } from './home.service';
+
+interface JobOffer {
+  id: number | string;
+  title: string;
+  company: string;
+  location: string;
+  salary: string;
+  modality: string;
+  icon: string;
+}
 
 @Component({
   selector: 'app-home',
   standalone: true,
   imports: [
     CommonModule,
-    IconFieldModule, 
-    InputIconModule, 
+    IconFieldModule,
+    InputIconModule,
     InputTextModule,
-    FormsModule, 
-    Button,
+    FormsModule,
     ChipModule,
     BadgeModule
   ],
   templateUrl: './home.html',
   styleUrl: './home.css',
+  providers: [HomeService]
 })
 export class Home implements OnInit {
-  searchPosition: string = '';
-  searchLocation: string = '';
-  loading: boolean = false;
+  searchPosition = '';
+  searchLocation = '';
+  loading = false;
 
-  // Datos de ejemplo (sin conexión real al backend)
   stats = {
     totalJobs: 18500,
     registeredCompanies: 2400,
@@ -37,7 +46,9 @@ export class Home implements OnInit {
     satisfactionRate: 94
   };
 
-  featuredJobs = [
+  searchTags = ['Marketing', 'UX/UI', 'TI', 'Ventas', 'Administración'];
+
+  featuredJobs: JobOffer[] = [
     {
       id: 1,
       title: 'Senior Frontend Developer',
@@ -94,52 +105,59 @@ export class Home implements OnInit {
     }
   ];
 
+  constructor(private homeService: HomeService) {}
+
   ngOnInit(): void {
-    // Aquí irían las llamadas a los servicios para obtener datos del backend
-    // Por ahora solo mostramos datos de ejemplo
+    this.loadFeaturedOffers();
   }
 
-  /**
-   * Busca empleos por criterios
-   * API: POST /api/jobs/search
-   * Params: { position: string, location: string }
-   * Response: { success: boolean, jobs: Job[], count: number }
-   */
+  loadFeaturedOffers(): void {
+    this.homeService.getFeaturedOffers().subscribe({
+      next: (offers) => {
+        if (offers.length) {
+          this.featuredJobs = offers.slice(0, 4);
+        }
+      },
+      error: () => {
+        // Mantener datos demo si el backend no responde
+      }
+    });
+  }
+
   searchJobs(): void {
-    if (!this.searchPosition && !this.searchLocation) {
+    if (!this.searchPosition.trim() && !this.searchLocation.trim()) {
       alert('Por favor ingresa un cargo o ubicación');
       return;
     }
 
     this.loading = true;
 
-    // TODO: Conectar con backend cuando esté listo
-    // const criteria = {
-    //   position: this.searchPosition,
-    //   location: this.searchLocation
-    // };
-    // this.jobService.searchJobs(criteria).subscribe(...)
+    const criteria = {
+      position: this.searchPosition.trim(),
+      location: this.searchLocation.trim()
+    };
 
-    // Simulación de búsqueda
-    setTimeout(() => {
-      this.loading = false;
-      alert(`Buscando empleos: ${this.searchPosition} en ${this.searchLocation || 'cualquier ubicación'}`);
-    }, 1000);
+    this.homeService.searchOffers(criteria).subscribe({
+      next: (offers) => {
+        this.loading = false;
+        if (offers.length) {
+          this.featuredJobs = offers.slice(0, 4);
+        } else {
+          alert('No se encontraron ofertas con esos filtros');
+        }
+      },
+      error: () => {
+        this.loading = false;
+        alert('No se pudo conectar con el backend en este momento');
+      }
+    });
   }
 
-  /**
-   * Busca por una etiqueta popular
-   * API: POST /api/jobs/search
-   * Params: { position: string }
-   */
   searchByTag(tag: string): void {
     this.searchPosition = tag;
     this.searchJobs();
   }
 
-  /**
-   * Navega a empleos o abre formulario de publicación
-   */
   navigateToJobs(): void {
     // this.router.navigate(['/empleos']);
   }
