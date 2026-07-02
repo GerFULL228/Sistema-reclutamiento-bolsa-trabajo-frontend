@@ -16,7 +16,7 @@ import { MessageServices } from '../../../../core/services/messages/message-serv
   selector: 'app-login',
   imports: [Button, RouterLink, ReactiveFormsModule, DividerModule, PasswordModule, InputTextModule, FloatLabelModule, ToastModule],
   templateUrl: './login.html',
-  styleUrl: './login.css',
+  styleUrl: './login.scss',
 })
 export class Login {
 

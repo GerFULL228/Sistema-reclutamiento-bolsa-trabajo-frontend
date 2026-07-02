@@ -6,7 +6,7 @@ import { TokenService } from './core/services/token/token';
   selector: 'app-root',
   imports: [RouterOutlet],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrl: './app.scss'
 })
 export class App  {
   
