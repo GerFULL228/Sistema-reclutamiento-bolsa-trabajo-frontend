@@ -1,0 +1,36 @@
+.top {
+  margin-bottom: 30px;
+}
+
+.top h1 {
+  margin: 0;
+}
+
+.top p {
+  color: #6b7280;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 20px;
+}
+
+.card {
+  background: white;
+
+  padding: 24px;
+
+  border-radius: 20px;
+
+  box-shadow: 0 5px 20px rgba(0,0,0,.06);
+}
+
+.card span {
+  color: #64748b;
+}
+
+.card h2 {
+  margin-top: 10px;
+  font-size: 36px;
+}

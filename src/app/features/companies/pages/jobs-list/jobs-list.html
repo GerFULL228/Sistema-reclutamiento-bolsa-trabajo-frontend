@@ -1,0 +1,66 @@
+<div class="header">
+
+  <div>
+    <h1>Mis Ofertas</h1>
+    <p>Gestiona las vacantes publicadas.</p>
+  </div>
+
+  <button class="new-job">
+    + Nueva Oferta
+  </button>
+
+</div>
+
+<div class="offers">
+
+  @for(offer of offers; track offer.id){
+
+    <div class="offer">
+
+      <div>
+
+        <div class="status">
+          {{offer.status}}
+        </div>
+
+        <h3>
+          {{offer.title}}
+        </h3>
+
+        <p>
+          {{offer.category}}
+          ·
+          {{offer.modality}}
+        </p>
+
+        <div class="metrics">
+
+          <span>
+            👥 {{offer.applicants}}
+          </span>
+
+          <span>
+            👁 {{offer.views}}
+          </span>
+
+        </div>
+
+      </div>
+
+      <div class="buttons">
+
+        <button>
+          Editar
+        </button>
+
+        <button>
+          Ver candidatos
+        </button>
+
+      </div>
+
+    </div>
+
+  }
+
+</div>
