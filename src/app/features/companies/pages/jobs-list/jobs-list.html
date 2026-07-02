@@ -1,13 +1,22 @@
 <div class="header">
 
   <div>
-    <h1>Mis Ofertas</h1>
+    <h1>Mis ofertas</h1>
     <p>Gestiona las vacantes publicadas.</p>
   </div>
 
   <button class="new-job">
-    + Nueva Oferta
+    + Nueva oferta
   </button>
+
+</div>
+
+<div class="filters">
+
+  <button class="active">Todas</button>
+  <button>Activas</button>
+  <button>Borradores</button>
+  <button>Cerradas</button>
 
 </div>
 
@@ -15,51 +24,77 @@
 
   @for(offer of offers; track offer.id){
 
-    <div class="offer">
+  <div class="offer">
 
-      <div>
+    <div class="offer-content">
 
-        <div class="status">
-          {{offer.status}}
-        </div>
+      <div class="offer-top">
 
-        <h3>
-          {{offer.title}}
-        </h3>
+        <div class="title-section">
 
-        <p>
-          {{offer.category}}
-          ·
-          {{offer.modality}}
-        </p>
+          <div class="job-icon">
+            <i class="pi pi-briefcase"></i>
+          </div>
 
-        <div class="metrics">
+          <div>
 
-          <span>
-            👥 {{offer.applicants}}
-          </span>
+            <h3>{{offer.title}}</h3>
 
-          <span>
-            👁 {{offer.views}}
-          </span>
+            <p>{{offer.category}} · {{offer.modality}}</p>
+
+          </div>
 
         </div>
+
+        <div class="right-top">
+
+          <p-tag [value]="offer.status" severity="success">
+          </p-tag>
+
+          <button pButton type="button" icon="pi pi-ellipsis-v" class="p-button-text menu">
+          </button>
+
+        </div>
+
+      </div>
+
+      <div class="metrics">
+
+        <span>
+          <i class="pi pi-users"></i>
+          {{offer.applicants}} postulantes
+        </span>
+
+        <span>
+          <i class="pi pi-eye"></i>
+          {{offer.views}} vistas
+        </span>
+
+        <span>
+          <i class="pi pi-calendar"></i>
+          {{offer.createdAt}}
+        </span>
+
+        <span>
+          <i class="pi pi-clock"></i>
+          {{offer.daysLeft}} días restantes
+        </span>
 
       </div>
 
       <div class="buttons">
 
-        <button>
-          Editar
-        </button>
+        <p-button label="Editar" severity="secondary" outlined="true">
+        </p-button>
 
-        <button>
-          Ver candidatos
-        </button>
+        <p-button label="Ver candidatos" icon="pi pi-users">
+        </p-button>
 
       </div>
 
     </div>
+
+  </div>
 
   }
 

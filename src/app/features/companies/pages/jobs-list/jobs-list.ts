@@ -1,8 +1,16 @@
 import { Component } from '@angular/core';
+import { ButtonModule } from 'primeng/button';
+import { TagModule } from 'primeng/tag';
+import { DividerModule } from 'primeng/divider';
 
 @Component({
   selector: 'app-jobs-list',
   standalone: true,
+  imports: [
+    ButtonModule,
+    TagModule,
+    DividerModule
+  ],
   templateUrl: './jobs-list.html',
   styleUrl: './jobs-list.scss'
 })

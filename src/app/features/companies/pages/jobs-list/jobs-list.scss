@@ -59,3 +59,182 @@
   display: flex;
   gap: 12px;
 }
+
+.filters{
+    display:flex;
+    gap:12px;
+    margin-bottom:28px;
+}
+
+.filters button{
+
+    border:none;
+    background:#f1f5f9;
+    padding:10px 18px;
+    border-radius:999px;
+    cursor:pointer;
+    transition:.25s;
+    font-weight:500;
+
+}
+
+.filters button:hover{
+
+    background:#dbeafe;
+
+}
+
+.filters .active{
+
+    background:#0f5d74;
+    color:white;
+
+}
+
+.offer{
+
+    transition:.25s;
+    border:1px solid #edf2f7;
+
+}
+
+.offer:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:0 18px 35px rgba(0,0,0,.08);
+
+}
+
+.offer-top{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:flex-start;
+
+}
+
+.title-section{
+
+    display:flex;
+
+    gap:18px;
+
+}
+
+.job-icon{
+
+    width:54px;
+
+    height:54px;
+
+    border-radius:14px;
+
+    background:#eaf7fb;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:24px;
+
+}
+
+.right-top{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+}
+
+.menu{
+
+    width:40px;
+    height:40px;
+
+}
+
+.metrics{
+
+    margin-top:20px;
+
+    margin-bottom:22px;
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:24px;
+
+    color:#64748b;
+
+}
+
+.primary{
+
+    background:#0f5d74;
+
+    color:white;
+
+    border:none;
+
+    padding:11px 18px;
+
+    border-radius:10px;
+
+}
+
+.secondary{
+
+    background:white;
+
+    border:1px solid #cbd5e1;
+
+    padding:11px 18px;
+
+    border-radius:10px;
+
+}
+
+.buttons button{
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.primary:hover{
+
+    background:#0b4d61;
+
+}
+
+.secondary:hover{
+
+    background:#f8fafc;
+
+}
+
+.header h1{
+
+    margin:0;
+
+    font-size:34px;
+
+}
+
+.header p{
+
+    color:#64748b;
+
+    margin-top:8px;
+
+}

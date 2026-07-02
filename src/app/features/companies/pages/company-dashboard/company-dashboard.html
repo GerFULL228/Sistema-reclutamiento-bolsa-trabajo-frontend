@@ -1,34 +1,191 @@
-<div class="top">
+<div class="dashboard-header">
 
-  <div>
-    <h1>Bienvenido, Tech Solutions</h1>
-    <p>
-      Gestiona tus procesos de reclutamiento.
-    </p>
+  <div class="header-info">
+    <h1>Panel de empresa</h1>
+    <p>Resumen de tu actividad de reclutamiento</p>
   </div>
+
+  <button class="new-job-btn">
+    + Nueva oferta
+  </button>
 
 </div>
 
 <div class="stats">
 
   <div class="card">
-    <span>Ofertas Activas</span>
+    <div class="card-top">
+      <div class="icon blue">
+        <i class="pi pi-briefcase"></i>
+      </div>
+
+      <span class="trend">↗</span>
+    </div>
+
     <h2>{{stats.jobs}}</h2>
+    <h4>Ofertas activas</h4>
+    <small>+1 esta semana</small>
   </div>
 
   <div class="card">
-    <span>Postulantes</span>
+
+    <div class="card-top">
+      <div class="icon purple">
+        <i class="pi pi-users"></i>
+      </div>
+
+      <span class="trend">↗</span>
+    </div>
+
     <h2>{{stats.applicants}}</h2>
+    <h4>Total postulantes</h4>
+    <small>+14 hoy</small>
+
   </div>
 
   <div class="card">
-    <span>Entrevistas</span>
+
+    <div class="card-top">
+      <div class="icon green">
+        <i class="pi pi-calendar"></i>
+      </div>
+
+      <span class="trend">↗</span>
+    </div>
+
     <h2>{{stats.interviews}}</h2>
+    <h4>Entrevistas prog.</h4>
+    <small>Esta semana</small>
+
   </div>
 
   <div class="card">
-    <span>Contrataciones</span>
+
+    <div class="card-top">
+      <div class="icon orange">
+        <i class="pi pi-user-plus"></i>
+      </div>
+
+      <span class="trend">↗</span>
+    </div>
+
     <h2>{{stats.hires}}</h2>
+    <h4>Contrataciones</h4>
+    <small>Este mes</small>
+
+  </div>
+
+</div>
+
+<!-- Seccion central -->
+<div class="dashboard-grid">
+
+  <div class="chart-card">
+
+    <div class="card-header">
+
+      <div>
+        <h2>Postulantes por mes</h2>
+        <p>Últimos 6 meses</p>
+      </div>
+
+      <span class="growth">↗ +34%</span>
+
+    </div>
+
+    <div class="fake-chart">
+
+      <div class="line"></div>
+
+      <div class="months">
+
+        <span>Ene</span>
+        <span>Feb</span>
+        <span>Mar</span>
+        <span>Abr</span>
+        <span>May</span>
+        <span>Jun</span>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="recent-card">
+
+    <div class="card-header">
+
+      <h2>Postulaciones recientes</h2>
+
+      <a href="#">Ver todas</a>
+
+    </div>
+
+    <div class="applicant">
+
+      <div class="avatar">CR</div>
+
+      <div>
+
+        <h4>Carlos Ramos</h4>
+
+        <span>Senior Frontend Developer</span>
+
+      </div>
+
+      <strong>92%</strong>
+
+    </div>
+
+    <div class="applicant">
+
+      <div class="avatar">AP</div>
+
+      <div>
+
+        <h4>Ana Pérez</h4>
+
+        <span>UX Designer</span>
+
+      </div>
+
+      <strong>87%</strong>
+
+    </div>
+
+    <div class="applicant">
+
+      <div class="avatar">LT</div>
+
+      <div>
+
+        <h4>Luis Torres</h4>
+
+        <span>Frontend Developer</span>
+
+      </div>
+
+      <strong>81%</strong>
+
+    </div>
+
+    <div class="applicant">
+
+      <div class="avatar">RM</div>
+
+      <div>
+
+        <h4>Rosa Medina</h4>
+
+        <span>Product Manager</span>
+
+      </div>
+
+      <strong>78%</strong>
+
+    </div>
+
   </div>
 
 </div>
