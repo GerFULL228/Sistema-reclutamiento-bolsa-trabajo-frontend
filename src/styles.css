@@ -10,13 +10,11 @@
 
 :root {
   --font-family-sans: 'Inter', sans-serif;
-}
-
-@theme {
   --color-primary: #1e5f74;
 }
 
 body {
   font-family: 'Inter', sans-serif;
-  @apply bg-gray-50 text-gray-900;
+  background-color: #F9FAFB;
+  color: #111827;
 }

@@ -1,5 +1,6 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { TokenService } from './core/services/token/token';
 
 @Component({
   selector: 'app-root',
@@ -7,6 +8,14 @@ import { RouterOutlet } from '@angular/router';
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
-export class App {
+export class App  {
+  
   protected readonly title = signal('Sistema-bolsa-trabajo');
+
+  private TokenService = inject(TokenService);
+
+  
+
+
+
 }
