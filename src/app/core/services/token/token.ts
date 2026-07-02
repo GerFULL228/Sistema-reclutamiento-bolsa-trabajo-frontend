@@ -14,12 +14,12 @@ export class TokenService {
 
   permisos = signal<string[]>([]);
 
-    constructor(){
+  constructor() {
 
-      this.permisos.set(this.getPermisos());
-    }
+    this.permisos.set(this.getPermisos());
+  }
 
-  initPermisos(){
+  initPermisos() {
     this.permisos.set(this.getPermisos());
 
   }
@@ -77,9 +77,9 @@ export class TokenService {
   getHomeByRole(): string {
     const roles = this.getRoles();
 
-    if (roles.includes('ROLE_admin')) return '/dashboard';
-    if (roles.includes('ROLE_barbero')) return '/dashboard';
-    if (roles.includes('ROLE_cliente')) return '/app';
+    if (roles.includes('ROLE_ADMIN')) return '/dashboard';
+    if (roles.includes('ROLE_EMPRESA')) return '/dashboard';
+    if (roles.includes('ROLE_POSTULANTE')) return '/app';
 
     return '/dashboard';
   }

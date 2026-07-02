@@ -11,9 +11,9 @@
       <a routerLink="/contacto" class="nav-link" [class.active]="activeRoute === '/contacto'" (click)="closeMenu()">Contacto</a>
     </nav>
 
-    <div class="desktop-actions">
-      <a routerLink="/login" class="btn-outline" (click)="closeMenu()">Iniciar sesión</a>
-      <a routerLink="/registro" class="btn-solid" (click)="closeMenu()">Registrarse</a>
+    <div class="items-center gap-3 hidden md:block">
+      <p-button label="Iniciar sesión" routerLink="/auth/login" styleClass="p-button-text"></p-button>
+      <p-button label="Registrarse" routerLink="/auth/register"></p-button>
     </div>
 
     <button class="mobile-toggle" type="button" (click)="toggleMenu()" [attr.aria-expanded]="menuOpen" aria-label="Abrir menú">
@@ -28,5 +28,10 @@
     <a routerLink="/empleos" class="mobile-link" [class.active]="activeRoute === '/empleos'" (click)="closeMenu()">Empleos</a>
     <a routerLink="/empresas" class="mobile-link" [class.active]="activeRoute === '/empresas'" (click)="closeMenu()">Empresas</a>
     <a routerLink="/contacto" class="mobile-link" [class.active]="activeRoute === '/contacto'" (click)="closeMenu()">Contacto</a>
+
+    <div class="flex items-center gap-3">
+      <p-button label="Iniciar sesión" routerLink="/auth/login" styleClass="p-button-text"></p-button>
+      <p-button label="Registrarse" routerLink="/auth/register"></p-button>
+    </div>
   </div>
 </header>
