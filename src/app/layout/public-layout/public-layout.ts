@@ -8,7 +8,7 @@ import { Footer } from '../../shared/components/ui/footer/footer';
   selector: 'app-public-layout',
   imports: [RouterOutlet,Header,Footer],
   templateUrl: './public-layout.html',
-  styleUrl: './public-layout.css',
+  styleUrl: './public-layout.scss',
 })
 export class PublicLayout {
 

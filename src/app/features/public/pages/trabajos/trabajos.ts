@@ -9,7 +9,7 @@ import { HomeService } from '../home/home.service';
   standalone: true,
   imports: [CommonModule, FormsModule, InputTextModule],
   templateUrl: './trabajos.html',
-  styleUrl: './trabajos.css'
+  styleUrl: './trabajos.scss'
 })
 export class Trabajos implements OnInit {
   private ofertasService = inject(HomeService);

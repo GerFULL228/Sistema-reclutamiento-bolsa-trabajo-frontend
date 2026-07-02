@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
     InputTextModule
   ],
   templateUrl: './home.html',
-  styleUrl: './home.css', 
+  styleUrl: './home.scss', 
 })
 export class Home implements OnInit {
   // Inyección del servicio

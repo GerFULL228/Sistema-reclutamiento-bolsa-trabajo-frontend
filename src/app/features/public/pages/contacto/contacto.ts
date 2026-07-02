@@ -7,7 +7,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './contacto.html',
-  styleUrl: './contacto.css'
+  styleUrl: './contacto.scss'
 })
 export class Contacto {
   

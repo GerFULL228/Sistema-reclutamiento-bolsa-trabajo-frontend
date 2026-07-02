@@ -9,7 +9,7 @@ import { filter } from 'rxjs/operators';
   standalone: true,
   imports: [RouterLink, ButtonModule, CommonModule],
   templateUrl: './header.html',
-  styleUrl: './header.css'
+  styleUrl: './header.scss'
 })
 export class Header implements OnInit {
   isHeaderVisible: boolean = true;

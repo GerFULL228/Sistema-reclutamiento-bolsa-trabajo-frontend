@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './empresas.html',
-  styleUrl: './empresas.css'
+  styleUrl: './empresas.scss'
 })
 export class Empresas {
   listaEmpresas = [
