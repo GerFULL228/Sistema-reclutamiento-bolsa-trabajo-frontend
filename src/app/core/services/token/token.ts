@@ -77,8 +77,8 @@ export class TokenService {
   getHomeByRole(): string {
     const roles = this.getRoles();
 
-    if (roles.includes('ROLE_ADMIN')) return '/dashboard';
-    if (roles.includes('ROLE_EMPRESA')) return '/dashboard';
+    if (roles.includes('ROLE_ADMIN')) return '/dashboard/admin';
+    if (roles.includes('ROLE_EMPRESA')) return '/dashboard/company';
     if (roles.includes('ROLE_POSTULANTE')) return '/app';
 
     return '/dashboard';

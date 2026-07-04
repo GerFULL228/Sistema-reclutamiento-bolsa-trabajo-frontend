@@ -13,7 +13,7 @@ import { Router, RouterLink, RouterOutlet } from '@angular/router';
 })
 export class DashboardLayout {
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) { }
 
   logout(): void {
     localStorage.clear(); // opcional

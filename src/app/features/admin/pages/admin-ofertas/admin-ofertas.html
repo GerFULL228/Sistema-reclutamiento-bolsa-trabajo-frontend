@@ -1,0 +1,47 @@
+<div class="dashboard-header">
+  <div class="header-info">
+    <h1>Gestión de ofertas</h1>
+    <p>Todas las ofertas laborales publicadas en la plataforma</p>
+  </div>
+</div>
+
+<div class="table-card">
+  <p-table
+    [value]="ofertas()"
+    [loading]="loading()"
+    [lazy]="true"
+    (onLazyLoad)="onLazyLoad($event)"
+    [paginator]="true"
+    [rows]="filasPorPagina"
+    [totalRecords]="totalRegistros()"
+    dataKey="id"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Título</th>
+        <th>Empresa</th>
+        <th>Ubicación</th>
+        <th>Salario</th>
+        <th>Estado</th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-oferta>
+      <tr>
+        <td>{{ oferta.titulo }}</td>
+        <td>{{ oferta.nombreEmpresa }}</td>
+        <td>{{ oferta.ubicacion }}</td>
+        <td>S/ {{ oferta.salario }}</td>
+        <td>
+          <p-tag [value]="oferta.estado" [severity]="severidadEstado(oferta.estado)" />
+        </td>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="5" class="empty">Todavía no hay ofertas registradas.</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

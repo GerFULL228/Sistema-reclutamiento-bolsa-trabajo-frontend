@@ -1,0 +1,52 @@
+<p-toast />
+
+<div class="layout">
+
+  <aside class="sidebar">
+
+    <div class="logo">
+      TalentHub
+    </div>
+
+    <div class="company-info">
+      <div class="avatar">
+        AD
+      </div>
+
+      <div>
+        <h4>Administrador</h4>
+        <span>Plataforma</span>
+      </div>
+    </div>
+
+    <nav>
+
+      <a routerLink="/dashboard/admin">
+        <i class="pi pi-home"></i>
+        Dashboard
+      </a>
+
+      <a routerLink="/dashboard/admin/empresas">
+        <i class="pi pi-building"></i>
+        Empresas
+      </a>
+
+      <a routerLink="/dashboard/admin/ofertas">
+        <i class="pi pi-briefcase"></i>
+        Ofertas
+      </a>
+
+    </nav>
+
+    <button class="logout-btn" (click)="logout()">
+      <i class="pi pi-sign-out"></i>
+      Cerrar sesión
+    </button>
+
+  </aside>
+
+  <main class="content">
+    <router-outlet />
+  </main>
+
+</div>
