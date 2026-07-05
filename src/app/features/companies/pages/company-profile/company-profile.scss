@@ -1,104 +1,123 @@
-*{
-  box-sizing: border-box;
+.page-shell {
+  padding: 3rem 1.5rem;
+  background: linear-gradient(180deg, #f8fbfc 0%, #ffffff 100%);
+}
+
+.page-header {
+  max-width: 920px;
+  margin: 0 auto 2rem;
+}
+
+.eyebrow {
+  margin: 0 0 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #0f5d74;
+}
+
+.page-header h1 {
   margin: 0;
-  padding: 0;
-  font-family: "Inter", sans-serif;
+  font-size: 2.6rem;
+  color: #111827;
 }
 
-.company-container{
-  min-height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  background:linear-gradient(135deg,#eef4ff,#f8f9fc);
-  padding:40px;
+.subtitle {
+  margin: 0.75rem 0 0;
+  color: #475569;
+  max-width: 760px;
+  line-height: 1.7;
 }
 
-.company-card{
-  width:850px;
-  background:#fff;
-  border-radius:20px;
-  padding:40px;
-  box-shadow:0 15px 40px rgba(0,0,0,.08);
+.form-card {
+  max-width: 920px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 28px;
+  padding: 2.5rem;
+  box-shadow: 0 20px 60px rgba(15, 63, 79, 0.08);
 }
 
-.company-card h1{
-  font-size:34px;
-  color:#1e293b;
-  margin-bottom:8px;
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
-.company-card p{
-  color:#64748b;
-  margin-bottom:35px;
-}
-
-.row{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:20px;
-}
-
-.form-group{
-  display:flex;
-  flex-direction:column;
-  margin-bottom:22px;
-}
-
-label{
-  margin-bottom:8px;
-  font-weight:600;
-  color:#334155;
-}
-
-input,
-textarea{
-  border:1px solid #dbe2ea;
-  border-radius:12px;
-  padding:14px;
-  font-size:15px;
-  transition:.25s;
-  background:#fafafa;
-}
-
-input:focus,
-textarea:focus{
-  border-color:#2563eb;
-  background:white;
-  box-shadow:0 0 0 4px rgba(37,99,235,.12);
-  outline:none;
-}
-
-textarea{
-  resize:none;
-}
-
-button{
-  width:100%;
-  padding:16px;
-  border:none;
-  border-radius:12px;
-  background:#2563eb;
-  color:white;
-  font-size:16px;
-  font-weight:600;
-  cursor:pointer;
-  transition:.25s;
-}
-
-button:hover{
-  background:#1d4ed8;
-  transform:translateY(-2px);
-}
-
-@media(max-width:768px){
-
-  .company-card{
-    width:100%;
+@media (max-width: 860px) {
+  .form-grid {
+    grid-template-columns: 1fr;
   }
+}
 
-  .row{
-    grid-template-columns:1fr;
-  }
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
 
+.form-group label {
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.form-group input,
+.form-group textarea {
+  border: 1px solid #e2e8f0;
+  background: #f8fafc;
+  border-radius: 16px;
+  padding: 0.95rem 1rem;
+  color: #0f172a;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: rgba(30, 95, 116, 0.45);
+  box-shadow: 0 0 0 4px rgba(30, 95, 116, 0.08);
+}
+
+textarea {
+  min-height: 130px;
+  resize: vertical;
+}
+
+.error-text {
+  color: #dc2626;
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1rem;
+}
+
+.btn {
+  padding: 0.95rem 2rem;
+  border: none;
+  border-radius: 999px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-primary {
+  background: var(--color-primary);
+  color: white;
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 16px 30px rgba(30, 95, 116, 0.18);
+}
+
+button[disabled] {
+  opacity: 0.7;
+  cursor: not-allowed;
 }
