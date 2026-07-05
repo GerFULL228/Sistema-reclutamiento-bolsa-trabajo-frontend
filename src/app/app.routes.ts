@@ -21,6 +21,27 @@ export const routes: Routes = [
       import('./features/auth/pages/register/register').then((p) => p.Register),
   },
   {
+    path: 'auth/register/empresa',
+    loadComponent: () =>
+      import('./features/companies/pages/company-profile/company-profile').then(
+        (p) => p.CompanyProfile
+      ),
+  },
+  {
+    path: 'auth/register/postulante',
+    loadComponent: () =>
+      import('./features/auth/pages/register/postulante-register/postulante-register').then(
+        (p) => p.PostulanteRegister
+      ),
+  },
+  {
+    path: 'auth/postulante/edit',
+    loadComponent: () =>
+      import('./features/auth/pages/register/edit-postulante/edit-postulante').then(
+        (p) => p.EditPostulante
+      ),
+  },
+  {
     path: 'dashboard',
     loadChildren: () =>
       import('./layout/dashboard-layout/public-layout.route').then(

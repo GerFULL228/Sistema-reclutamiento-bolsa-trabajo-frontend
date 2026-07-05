@@ -1,0 +1,54 @@
+.page-shell {
+  background: #f3f4f6;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.label {
+  font-weight: 600;
+  color: #374151;
+}
+
+input,
+textarea,
+.p-password {
+  width: 100%;
+}
+
+.p-password {
+  position: relative;
+}
+
+.p-password .p-password-input {
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 0.75rem;
+  border: 1px solid #d1d5db;
+  padding: 0.85rem 1rem;
+  background: #f9fafb;
+  color: #0f172a;
+  font-size: 1rem;
+  min-height: 3rem;
+}
+
+.p-password .p-password-toggle {
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+input,
+textarea {
+  border-radius: 0.75rem;
+  border: 1px solid #d1d5db;
+  padding: 0.85rem 1rem;
+  background: #f9fafb;
+}
+
+button.p-button {
+  padding: 1rem 1.5rem;
+}

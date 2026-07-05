@@ -1,42 +1,9 @@
 .page-shell {
-  padding: 3rem 1.5rem;
-  background: linear-gradient(180deg, #f8fbfc 0%, #ffffff 100%);
+  background: #f3f4f6;
 }
 
-.page-header {
-  max-width: 920px;
-  margin: 0 auto 2rem;
-}
-
-.eyebrow {
-  margin: 0 0 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.3em;
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: #0f5d74;
-}
-
-.page-header h1 {
-  margin: 0;
-  font-size: 2.6rem;
-  color: #111827;
-}
-
-.subtitle {
-  margin: 0.75rem 0 0;
-  color: #475569;
-  max-width: 760px;
-  line-height: 1.7;
-}
-
-.form-card {
-  max-width: 920px;
-  margin: 0 auto;
-  background: white;
-  border-radius: 28px;
-  padding: 2.5rem;
-  box-shadow: 0 20px 60px rgba(15, 63, 79, 0.08);
+.page-shell .max-w-4xl {
+  max-width: 1024px;
 }
 
 .form-grid {
@@ -108,13 +75,24 @@ textarea {
 }
 
 .btn-primary {
-  background: var(--color-primary);
+  background: #1e5f74;
   color: white;
 }
 
 .btn-primary:hover {
   transform: translateY(-1px);
   box-shadow: 0 16px 30px rgba(30, 95, 116, 0.18);
+}
+
+.btn-secondary {
+  background: white;
+  color: #1e5f74;
+  border: 1px solid #1e5f74;
+}
+
+.btn-secondary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 24px rgba(30, 95, 116, 0.12);
 }
 
 button[disabled] {
