@@ -8,8 +8,6 @@ export interface Empresa {
   estadoValidacion: EstadoValidacion;
   usuarioEmail: string;
 }
-
-// Se usa para el formulario de edición (PUT /api/empresas/{id})
 export interface EmpresaRequest {
   nombreEmpresa: string;
   ruc: string;
@@ -18,6 +16,8 @@ export interface EmpresaRequest {
   razonSocial: string;
   paginaWeb?: string;
   usuario: {
+    nombre?: string;
+    apellido?: string;
     email: string;
     password?: string;
   };

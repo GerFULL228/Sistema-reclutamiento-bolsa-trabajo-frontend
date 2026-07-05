@@ -1,3 +1,5 @@
+<p-confirmdialog />
+
 <div class="dashboard-header">
   <div class="header-info">
     <h1>Gestión de ofertas</h1>
@@ -6,16 +8,8 @@
 </div>
 
 <div class="table-card">
-  <p-table
-    [value]="ofertas()"
-    [loading]="loading()"
-    [lazy]="true"
-    (onLazyLoad)="onLazyLoad($event)"
-    [paginator]="true"
-    [rows]="filasPorPagina"
-    [totalRecords]="totalRegistros()"
-    dataKey="id"
-  >
+  <p-table [value]="ofertas()" [loading]="loading()" [lazy]="true" (onLazyLoad)="onLazyLoad($event)" [paginator]="true"
+    [rows]="filasPorPagina" [totalRecords]="totalRegistros()" dataKey="id">
     <ng-template pTemplate="header">
       <tr>
         <th>Título</th>
@@ -23,6 +17,7 @@
         <th>Ubicación</th>
         <th>Salario</th>
         <th>Estado</th>
+        <th style="width: 120px">Acciones</th>
       </tr>
     </ng-template>
 
@@ -35,12 +30,23 @@
         <td>
           <p-tag [value]="oferta.estado" [severity]="severidadEstado(oferta.estado)" />
         </td>
+        <td>
+          <div class="acciones">
+            <a [routerLink]="['/dashboard/admin/ofertas', oferta.id]" pButton class="p-button-text"
+              title="Ver / editar">
+              <i class="pi pi-pencil"></i>
+            </a>
+            <button pButton class="p-button-text p-button-danger" title="Eliminar" (click)="confirmarEliminar(oferta)">
+              <i class="pi pi-trash"></i>
+            </button>
+          </div>
+        </td>
       </tr>
     </ng-template>
 
     <ng-template pTemplate="emptymessage">
       <tr>
-        <td colspan="5" class="empty">Todavía no hay ofertas registradas.</td>
+        <td colspan="6" class="empty">Todavía no hay ofertas registradas.</td>
       </tr>
     </ng-template>
   </p-table>

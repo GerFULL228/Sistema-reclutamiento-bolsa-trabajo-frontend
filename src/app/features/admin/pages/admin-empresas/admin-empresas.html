@@ -5,39 +5,20 @@
     <h1>Gestión de empresas</h1>
     <p>Empresas registradas en la plataforma</p>
   </div>
+  <a routerLink="/dashboard/admin/empresas/nueva" pButton icon="pi pi-plus" label="Nueva empresa"></a>
 </div>
 
 <div class="toolbar">
-  <input
-    pInputText
-    type="text"
-    placeholder="Buscar por nombre, RUC o correo..."
-    [ngModel]="busqueda()"
-    (ngModelChange)="busqueda.set($event)"
-    class="search-input"
-  />
+  <input pInputText type="text" placeholder="Buscar por nombre, RUC o correo..." [ngModel]="busqueda()"
+    (ngModelChange)="busqueda.set($event)" class="search-input" />
 
-  <p-select
-    [options]="estadosOptions"
-    optionLabel="label"
-    optionValue="value"
-    placeholder="Filtrar por estado"
-    [ngModel]="estadoFiltro()"
-    (ngModelChange)="estadoFiltro.set($event)"
-    [showClear]="true"
-    class="estado-select"
-  />
+  <p-select [options]="estadosOptions" optionLabel="label" optionValue="value" placeholder="Filtrar por estado"
+    [ngModel]="estadoFiltro()" (ngModelChange)="estadoFiltro.set($event)" [showClear]="true" class="estado-select" />
 </div>
 
 <div class="table-card">
-  <p-table
-    [value]="empresasFiltradas()"
-    [loading]="loading()"
-    [paginator]="true"
-    [rows]="10"
-    [rowsPerPageOptions]="[10, 20, 50]"
-    dataKey="id"
-  >
+  <p-table [value]="empresasFiltradas()" [loading]="loading()" [paginator]="true" [rows]="10"
+    [rowsPerPageOptions]="[10, 20, 50]" dataKey="id">
     <ng-template pTemplate="header">
       <tr>
         <th>Empresa</th>
@@ -66,7 +47,8 @@
         </td>
         <td>
           <div class="acciones">
-            <a [routerLink]="['/dashboard/admin/empresas', empresa.id]" pButton class="p-button-text" title="Ver / editar">
+            <a [routerLink]="['/dashboard/admin/empresas', empresa.id]" pButton class="p-button-text"
+              title="Ver / editar">
               <i class="pi pi-pencil"></i>
             </a>
             <button pButton class="p-button-text p-button-danger" title="Eliminar" (click)="confirmarEliminar(empresa)">

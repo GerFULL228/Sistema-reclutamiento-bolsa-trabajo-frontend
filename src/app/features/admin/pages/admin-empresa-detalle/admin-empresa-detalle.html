@@ -10,58 +10,70 @@
         <h1>Editar empresa</h1>
         <p>Correo del titular: {{ correoUsuario() }}</p>
       </div>
-      <p-tag [value]="estadoActual()" />
+      <div class="acciones-estado">
+        <p-tag [value]="estadoActual()" />
+
+        @if (estadoActual() !== 'ACTIVO') {
+        <button pButton type="button" class="p-button-sm p-button-success" label="Aprobar" [loading]="procesando()"
+          (click)="aprobar()"></button>
+        }
+
+        @if (estadoActual() !== 'RECHAZADO') {
+        <button pButton type="button" class="p-button-sm p-button-outlined p-button-danger" label="Rechazar"
+          [loading]="procesando()" (click)="rechazar()"></button>
+        }
+      </div>
     </div>
 
     @if (loading()) {
-      <p class="empty">Cargando datos de la empresa...</p>
+    <p class="empty">Cargando datos de la empresa...</p>
     } @else {
-      <form [formGroup]="empresaForm" (ngSubmit)="guardar()">
+    <form [formGroup]="empresaForm" (ngSubmit)="guardar()">
 
-        <div class="row">
-          <div class="form-group">
-            <label>Nombre de la empresa *</label>
-            <input pInputText type="text" formControlName="nombreEmpresa" />
-            @if (campoInvalido('nombreEmpresa')) {
-              <small class="error">El nombre debe tener al menos 3 caracteres.</small>
-            }
-          </div>
-
-          <div class="form-group">
-            <label>RUC *</label>
-            <input pInputText type="text" formControlName="ruc" maxlength="11" />
-            @if (campoInvalido('ruc')) {
-              <small class="error">El RUC debe tener 11 dígitos numéricos.</small>
-            }
-          </div>
-        </div>
-
+      <div class="row">
         <div class="form-group">
-          <label>Razón social *</label>
-          <input pInputText type="text" formControlName="razonSocial" />
-          @if (campoInvalido('razonSocial')) {
-            <small class="error">La razón social es obligatoria.</small>
+          <label>Nombre de la empresa *</label>
+          <input pInputText type="text" formControlName="nombreEmpresa" />
+          @if (campoInvalido('nombreEmpresa')) {
+          <small class="error">El nombre debe tener al menos 3 caracteres.</small>
           }
         </div>
 
         <div class="form-group">
-          <label>Dirección</label>
-          <input pInputText type="text" formControlName="direccion" />
+          <label>RUC *</label>
+          <input pInputText type="text" formControlName="ruc" maxlength="11" />
+          @if (campoInvalido('ruc')) {
+          <small class="error">El RUC debe tener 11 dígitos numéricos.</small>
+          }
         </div>
+      </div>
 
-        <div class="form-group">
-          <label>Página web</label>
-          <input pInputText type="text" formControlName="paginaWeb" placeholder="https://..." />
-        </div>
+      <div class="form-group">
+        <label>Razón social *</label>
+        <input pInputText type="text" formControlName="razonSocial" />
+        @if (campoInvalido('razonSocial')) {
+        <small class="error">La razón social es obligatoria.</small>
+        }
+      </div>
 
-        <div class="form-group">
-          <label>Descripción</label>
-          <textarea pTextarea rows="4" formControlName="descripcion"></textarea>
-        </div>
+      <div class="form-group">
+        <label>Dirección</label>
+        <input pInputText type="text" formControlName="direccion" />
+      </div>
 
-        <button pButton type="submit" [loading]="guardando()" label="Guardar cambios"></button>
+      <div class="form-group">
+        <label>Página web</label>
+        <input pInputText type="text" formControlName="paginaWeb" placeholder="https://..." />
+      </div>
 
-      </form>
+      <div class="form-group">
+        <label>Descripción</label>
+        <textarea pTextarea rows="4" formControlName="descripcion"></textarea>
+      </div>
+
+      <button pButton type="submit" [loading]="guardando()" label="Guardar cambios"></button>
+
+    </form>
     }
 
   </div>

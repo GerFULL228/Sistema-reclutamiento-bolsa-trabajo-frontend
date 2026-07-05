@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environment/environmment.develop';
-import { Oferta } from '../models/Oferta';
+import { Oferta, OfertaUpdateRequest } from '../models/Oferta';
 import { PageResponse } from '../models/PageResponse';
 
 @Injectable({
@@ -12,6 +12,7 @@ export class AdminOfertaService {
 
   private http = inject(HttpClient);
   private apiUrl = `${environment.apiUrl}/admin/ofertas`;
+  private apiUrlEmpresa = `${environment.apiUrl}/empresa/ofertas`;
 
   listar(page: number = 0, size: number = 5): Observable<PageResponse<Oferta>> {
     return this.http.get<PageResponse<Oferta>>(this.apiUrl, {
@@ -21,5 +22,13 @@ export class AdminOfertaService {
 
   obtenerPorId(id: number): Observable<Oferta> {
     return this.http.get<Oferta>(`${this.apiUrl}/${id}`);
+  }
+
+  actualizar(id: number, data: OfertaUpdateRequest): Observable<Oferta> {
+    return this.http.patch<Oferta>(`${this.apiUrlEmpresa}/${id}`, data);
+  }
+
+  eliminar(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrlEmpresa}/${id}`);
   }
 }

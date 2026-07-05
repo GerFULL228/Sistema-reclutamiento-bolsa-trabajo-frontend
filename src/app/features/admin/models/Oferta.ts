@@ -9,3 +9,11 @@ export interface Oferta {
   estado: OfertaEstado;
   nombreEmpresa: string;
 }
+
+export interface OfertaUpdateRequest {
+  titulo: string;
+  descripcion: string;
+  ubicacion: string;
+  salario: number;
+  estado: OfertaEstado;
+}

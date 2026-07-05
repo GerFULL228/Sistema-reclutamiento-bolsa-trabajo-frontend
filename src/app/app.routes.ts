@@ -42,8 +42,6 @@ export const routes: Routes = [
     path: 'edit-company',
     component: EditCompany
   }
-
-
 ];
 
 

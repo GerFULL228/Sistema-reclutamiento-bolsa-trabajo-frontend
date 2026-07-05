@@ -1,0 +1,71 @@
+<p-confirmdialog />
+
+<div class="oferta-container">
+    <div class="oferta-card">
+
+        <a routerLink="/dashboard/admin/ofertas" class="volver">
+            <i class="pi pi-arrow-left"></i> Volver al listado
+        </a>
+
+        <div class="titulo-row">
+            <div>
+                <h1>Editar oferta</h1>
+                <p>Empresa: {{ nombreEmpresa() }}</p>
+            </div>
+        </div>
+
+        @if (loading()) {
+        <p class="empty">Cargando datos de la oferta...</p>
+        } @else {
+        <form [formGroup]="ofertaForm" (ngSubmit)="guardar()">
+
+            <div class="form-group">
+                <label>Título *</label>
+                <input pInputText type="text" formControlName="titulo" />
+                @if (campoInvalido('titulo')) {
+                <small class="error">El título debe tener al menos 3 caracteres.</small>
+                }
+            </div>
+
+            <div class="row">
+                <div class="form-group">
+                    <label>Ubicación *</label>
+                    <input pInputText type="text" formControlName="ubicacion" />
+                    @if (campoInvalido('ubicacion')) {
+                    <small class="error">La ubicación es obligatoria.</small>
+                    }
+                </div>
+
+                <div class="form-group">
+                    <label>Salario (S/) *</label>
+                    <input pInputText type="number" formControlName="salario" />
+                    @if (campoInvalido('salario')) {
+                    <small class="error">Ingresa un salario válido.</small>
+                    }
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Estado *</label>
+                <p-select [options]="estadosOptions" optionLabel="label" optionValue="value" formControlName="estado" />
+            </div>
+
+            <div class="form-group">
+                <label>Descripción *</label>
+                <textarea pTextarea rows="5" formControlName="descripcion"></textarea>
+                @if (campoInvalido('descripcion')) {
+                <small class="error">La descripción debe tener al menos 10 caracteres.</small>
+                }
+            </div>
+
+            <div class="acciones-form">
+                <button pButton type="submit" [loading]="guardando()" label="Guardar cambios"></button>
+                <button pButton type="button" class="p-button-outlined p-button-danger" label="Eliminar oferta"
+                    (click)="confirmarEliminar()"></button>
+            </div>
+
+        </form>
+        }
+
+    </div>
+</div>

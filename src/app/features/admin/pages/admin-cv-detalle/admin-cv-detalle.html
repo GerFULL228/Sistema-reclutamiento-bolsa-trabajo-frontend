@@ -1,0 +1,73 @@
+<p-confirmdialog />
+
+<div class="cv-container">
+    <div class="cv-card">
+
+        <a routerLink="/dashboard/admin/cv" class="volver">
+            <i class="pi pi-arrow-left"></i> Volver al listado
+        </a>
+
+        <div class="titulo-row">
+            <div>
+                <h1>Editar CV</h1>
+                <p>Postulante: {{ nombreUsuario() }}</p>
+            </div>
+        </div>
+
+        @if (loading()) {
+        <p class="empty">Cargando datos del CV...</p>
+        } @else {
+        <form [formGroup]="cvForm" (ngSubmit)="guardar()">
+
+            <div class="form-group">
+                <label>Título profesional *</label>
+                <input pInputText type="text" formControlName="tituloProfesional" />
+                @if (campoInvalido('tituloProfesional')) {
+                <small class="error">El título debe tener al menos 3 caracteres.</small>
+                }
+            </div>
+
+            <div class="row">
+                <div class="form-group">
+                    <label>Teléfono</label>
+                    <input pInputText type="text" formControlName="telefono" />
+                </div>
+
+                <div class="form-group">
+                    <label>LinkedIn</label>
+                    <input pInputText type="text" formControlName="linkedin"
+                        placeholder="https://linkedin.com/in/..." />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Descripción</label>
+                <textarea pTextarea rows="3" formControlName="descripcion"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Experiencia</label>
+                <textarea pTextarea rows="4" formControlName="experiencia"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Habilidades</label>
+                <textarea pTextarea rows="3" formControlName="habilidades"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Educación</label>
+                <textarea pTextarea rows="3" formControlName="educacion"></textarea>
+            </div>
+
+            <div class="acciones-form">
+                <button pButton type="submit" [loading]="guardando()" label="Guardar cambios"></button>
+                <button pButton type="button" class="p-button-outlined p-button-danger" label="Eliminar CV"
+                    (click)="confirmarEliminar()"></button>
+            </div>
+
+        </form>
+        }
+
+    </div>
+</div>

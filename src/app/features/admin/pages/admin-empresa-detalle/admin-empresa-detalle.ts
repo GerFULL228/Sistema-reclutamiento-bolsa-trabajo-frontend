@@ -36,6 +36,7 @@ export class AdminEmpresaDetalle implements OnInit {
   guardando = signal<boolean>(false);
   estadoActual = signal<EstadoValidacion>('PENDIENTE');
   correoUsuario = signal<string>('');
+  procesando = signal<boolean>(false);
 
   empresaForm = this.fb.group({
     nombreEmpresa: ['', [Validators.required, Validators.minLength(3)]],
@@ -107,5 +108,29 @@ export class AdminEmpresaDetalle implements OnInit {
   campoInvalido(campo: string): boolean {
     const control = this.empresaForm.get(campo);
     return !!control && control.invalid && (control.dirty || control.touched);
+  }
+
+  aprobar(): void {
+    this.cambiarEstado('ACTIVO');
+  }
+
+  rechazar(): void {
+    this.cambiarEstado('RECHAZADO');
+  }
+
+  private cambiarEstado(estado: EstadoValidacion): void {
+    this.procesando.set(true);
+
+    this.adminEmpresaService.actualizarEstado(this.empresaId, estado).subscribe({
+      next: () => {
+        this.estadoActual.set(estado);
+        this.messageService.showSuccess(`Empresa marcada como ${estado}.`);
+        this.procesando.set(false);
+      },
+      error: (err) => {
+        this.messageService.showError(err.error?.message || 'No se pudo actualizar el estado.');
+        this.procesando.set(false);
+      }
+    });
   }
 }
