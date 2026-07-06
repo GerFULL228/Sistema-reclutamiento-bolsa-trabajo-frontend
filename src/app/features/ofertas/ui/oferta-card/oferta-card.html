@@ -1,0 +1,37 @@
+<div class="card_contenedor">
+
+  <div class="header">
+
+    <div class="empresa">
+      <div class="avatar">{{ resultado }}</div>
+
+      <div class="info">
+        <h3>{{ oferta.titulo }}</h3>
+        <span class="empresa-nombre">{{ oferta.nombreEmpresa }}</span>
+      </div>
+    </div>
+
+    <span
+      class="estado"
+      [class.activo]="oferta.estado"
+      [class.inactivo]="!oferta.estado">
+      {{ oferta.estado ? 'Activo' : 'Cerrado' }}
+    </span>
+
+  </div>
+
+  <div class="contenido">
+
+    <div class="detalle">
+      <span>📍 {{ oferta.ubicacion }}</span>
+      <span>💰 S/ {{ oferta.salario }}</span>
+    </div>
+
+    <div class="footer">
+      <span class="tag">Remoto</span>
+      <span class="fecha">Hace 2 días</span>
+    </div>
+
+  </div>
+
+</div>

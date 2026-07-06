@@ -127,23 +127,9 @@
       <p>Las oportunidades más recientes del mercado</p>
     </div>
 
-    <div class="jobs-grid">
-      @for (job of featuredJobs; track job.id) {
-        <div class="job-card">
-          <div class="job-header">
-            <i class="pi pi-briefcase"></i>
-            <span class="job-modality" [ngClass]="'modality-' + (job.modality ? job.modality.toLowerCase() : 'remoto')">
-              {{ job.modality || 'Remoto' }}
-            </span>
-          </div>
-          <h3>{{ job.title }}</h3>
-          <p class="company">{{ job.company }}</p>
-          <div class="job-location">
-            <i class="pi pi-map-marker"></i>
-            {{ job.location }}
-          </div>
-          <div class="job-salary">{{ job.salary }}</div>
-        </div>
+    <div class="grid grid-cols-1 md:grid-cols-2  gap-6">
+      @for( oferta of ofertas(); track oferta.id) {
+        <app-oferta-card [oferta]="oferta"></app-oferta-card>
       }
       
       @empty {

@@ -44,8 +44,8 @@ export const routes: Routes = [
   {
     path: 'dashboard',
     loadChildren: () =>
-      import('./layout/dashboard-layout/public-layout.route').then(
-        (p) => p.PUBLIC_LAYOUT_ROUTE
+      import('./layout/dashboard-layout/dashboard-layout.route').then(
+        (p) => p.DASHBOARD_LAYOUT_ROUTE
       ),
   },
 
