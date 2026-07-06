@@ -16,7 +16,7 @@ export const PUBLIC_LAYOUT_ROUTE:Routes = [
           },
           {
             path: 'empleos',
-            loadComponent : () => import('../../features/public/pages/trabajos/trabajos').then(p=>p.Trabajos)
+            loadComponent : () => import('../../features/ofertas/catalogo/pages/oferta-list/oferta-list').then(p=>p.OfertaList)
           },
           {
             path: 'empresas',

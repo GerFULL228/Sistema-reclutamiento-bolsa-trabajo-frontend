@@ -1,9 +1,9 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { InputTextModule } from 'primeng/inputtext';
-import { HomeService } from './home.service';
+
 import { Router } from '@angular/router';
+import { InputTextModule } from 'primeng/inputtext';
 
 @Component({
   selector: 'app-home',
@@ -17,8 +17,8 @@ import { Router } from '@angular/router';
   styleUrl: './home.scss', 
 })
 export class Home implements OnInit {
-  // Inyección del servicio
-  private homeService = inject(HomeService);
+  
+  
   private router = inject(Router);
 
   // Variables para el buscador
@@ -49,35 +49,11 @@ export class Home implements OnInit {
   }
 
   cargarOfertasDestacadas() {
-    this.loading = true;
-    // Llamada real al backend para cargar las ofertas en el inicio
-    this.homeService.getFeaturedOffers(0, 6).subscribe({
-      next: (data) => {
-        this.featuredJobs = data;
-        this.loading = false;
-      },
-      error: (err) => {
-        console.error('Error al cargar ofertas', err);
-        this.loading = false;
-      }
-    });
+   
   }
 
   searchJobs() {
-    this.loading = true;
-    // Llamada real al backend usando los filtros del diseño
-    this.homeService.searchOffers({ 
-      position: this.searchPosition, 
-      location: this.searchLocation 
-    }, 0, 6).subscribe({
-      next: (data) => {
-        this.featuredJobs = data;
-        this.loading = false;
-      },
-      error: () => {
-        this.loading = false;
-      }
-    });
+    
   }
 
   searchByTag(tag: string) {
