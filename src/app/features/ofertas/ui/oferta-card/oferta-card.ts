@@ -10,6 +10,14 @@ import { OfertaResponse } from '../../data-access/oferta.model';
 })
 export class OfertaCard {
 
-  @Input() oferta!:OfertaResponse;
+  @Input() oferta!: OfertaResponse;
+
+  get ofertaempresa(): string[] {
+    return this.oferta.nombreEmpresa.trim().split(/\s+/);
+  }
+
+  get resultado(): string {
+    return this.ofertaempresa[0][0] + this.ofertaempresa[this.ofertaempresa.length - 1][0];
+  }
 
 }

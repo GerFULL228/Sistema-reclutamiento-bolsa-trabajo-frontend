@@ -10,6 +10,7 @@ export class OfertaFacade {
 
   ofertas = this.store.ofertas;
   loading = this.store.loading;
+  ofertasDestacadas = this.store.ofertasDestacadas;
 
   cargarPublicas() {
     this.store.loadPublicas();

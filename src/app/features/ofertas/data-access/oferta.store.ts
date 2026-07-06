@@ -1,7 +1,7 @@
 import { inject } from "@angular/core";
 import { OfertaService } from "./oferta.service";
 import { OfertaState } from "./oferta.state";
-import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
+import { patchState, signalStore, withComputed, withMethods, withState } from '@ngrx/signals';
 
 export const OfertaStore = signalStore(
     { providedIn: 'root' },
@@ -45,6 +45,9 @@ export const OfertaStore = signalStore(
                 });
             });
         }
+    })),
+    withComputed((store)=> ({
+        ofertasDestacadas: () =>store.ofertas().slice(0, 4)
     }))
 );
 

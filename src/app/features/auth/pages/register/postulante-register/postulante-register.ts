@@ -6,7 +6,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { ToastModule } from 'primeng/toast';
 import { MessageServices } from '../../../../../core/services/messages/message-service';
-import { HomeService } from '../../../../../features/public/pages/home/home.service';
+
 
 @Component({
   selector: 'app-postulante-register',
@@ -19,7 +19,7 @@ export class PostulanteRegister {
   private fb = inject(NonNullableFormBuilder);
   private router = inject(Router);
   private messageService = inject(MessageServices);
-  private homeService = inject(HomeService);
+ 
 
   loading = false;
 
@@ -47,16 +47,6 @@ export class PostulanteRegister {
     this.loading = true;
     const data = this.postulanteForm.getRawValue();
 
-    this.homeService.registerPostulante(data).subscribe({
-      next: () => {
-        this.loading = false;
-        this.messageService.showSuccess('Registro de postulante completado correctamente.');
-        this.router.navigate(['/home']);
-      },
-      error: (err: any) => {
-        this.loading = false;
-        this.messageService.showError(err.error?.message || 'No se pudo completar el registro.');
-      },
-    });
+   
   }
 }

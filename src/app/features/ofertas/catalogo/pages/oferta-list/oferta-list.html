@@ -20,11 +20,11 @@
         <i class="pi pi-spin pi-spinner text-4xl" style="color: #1e5f74;"></i>
       </div>
     } @else {
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         @for (job of ofertas(); track job.id) {
-          <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col justify-between h-full">
+          
             <app-oferta-card [oferta]="job"></app-oferta-card>
-          </div>
+          
         } @empty {
           <div class="col-span-full text-center py-16 text-gray-500 bg-white border border-gray-100 rounded-xl shadow-sm">
             <i class="pi pi-folder-open text-4xl mb-3"></i>
