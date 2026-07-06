@@ -1,72 +1,93 @@
-<div class="page-shell">
-  <div class="page-header">
-    <div>
-      <p class="eyebrow">Perfil de empresa</p>
-      <h1>Crear Perfil de Empresa</h1>
-      <p class="subtitle">Completa los datos para que tu empresa se muestre con el mismo estilo moderno del resto del sitio.</p>
+<div class="page-shell py-16 bg-gray-50 min-h-screen">
+  <div class="max-w-4xl mx-auto bg-white rounded-3xl shadow-lg overflow-hidden">
+    <div class="grid grid-cols-1 lg:grid-cols-2">
+      <div class="p-10 bg-[#1e5f74] text-white">
+        <h1 class="text-3xl font-bold mb-4">Registro de Empresa</h1>
+        <p class="text-sm leading-relaxed text-gray-200">
+          Completa los datos de tu empresa para publicar ofertas y conectar con los mejores candidatos.
+        </p>
+
+        <div class="mt-8 space-y-5 text-sm text-gray-200">
+          <div>
+            <span class="font-semibold">Información de la empresa</span>
+            <p>Nombre, RUC y datos de contacto para crear tu perfil empresarial.</p>
+          </div>
+          <div>
+            <span class="font-semibold">Publica vacantes</span>
+            <p>Empieza a compartir tus ofertas y gestionar postulaciones desde TalentHub.</p>
+          </div>
+          <div>
+            <span class="font-semibold">Crece con talento</span>
+            <p>Atrae talento calificado y construye el equipo que tu empresa necesita.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-10">
+        <div class="mb-6">
+          <button type="button" class="btn btn-secondary" (click)="goBack()">Atrás</button>
+        </div>
+
+        <form [formGroup]="companyForm" (ngSubmit)="guardar()" class="space-y-6">
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Nombre de la empresa</label>
+              <input type="text" formControlName="nombre" placeholder="Ej. Tech Solutions SAC" />
+              @if (companyForm.get('nombre')?.invalid && companyForm.get('nombre')?.touched) {
+                <small class="error-text">El nombre es obligatorio (mínimo 3 caracteres).</small>
+              }
+            </div>
+
+            <div class="form-group">
+              <label>RUC</label>
+              <input type="text" formControlName="ruc" placeholder="20123456789" />
+              @if (companyForm.get('ruc')?.invalid && companyForm.get('ruc')?.touched) {
+                <small class="error-text">El RUC debe tener 11 dígitos.</small>
+              }
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Correo corporativo</label>
+              <input type="email" formControlName="correoCorporativo" placeholder="empresa@correo.com" />
+              @if (companyForm.get('correoCorporativo')?.invalid && companyForm.get('correoCorporativo')?.touched) {
+                <small class="error-text">Ingresa un correo válido.</small>
+              }
+            </div>
+
+            <div class="form-group">
+              <label>Teléfono</label>
+              <input type="text" formControlName="telefono" placeholder="987654321" />
+              @if (companyForm.get('telefono')?.invalid && companyForm.get('telefono')?.touched) {
+                <small class="error-text">Ingresa un teléfono válido (9 dígitos).</small>
+              }
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Dirección</label>
+            <input type="text" formControlName="direccion" placeholder="Av. Javier Prado 123" />
+            @if (companyForm.get('direccion')?.invalid && companyForm.get('direccion')?.touched) {
+              <small class="error-text">La dirección es obligatoria.</small>
+            }
+          </div>
+
+          <div class="form-group">
+            <label>Descripción</label>
+            <textarea rows="5" formControlName="descripcion" placeholder="Describe la empresa..."></textarea>
+            @if (companyForm.get('descripcion')?.invalid && companyForm.get('descripcion')?.touched) {
+              <small class="error-text">La descripción debe tener al menos 20 caracteres.</small>
+            }
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary" [disabled]="loading">
+              {{ loading ? 'Guardando...' : 'Guardar Perfil' }}
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
-    <button type="button" class="btn btn-secondary back-button" (click)="goBack()">Volver</button>
-  </div>
-
-  <div class="form-card">
-    <form [formGroup]="companyForm" (ngSubmit)="guardar()">
-      <div class="form-grid">
-        <div class="form-group">
-          <label>Nombre de la empresa</label>
-          <input type="text" formControlName="nombre" placeholder="Ej. Tech Solutions SAC" />
-          @if (companyForm.get('nombre')?.invalid && companyForm.get('nombre')?.touched) {
-            <small class="error-text">El nombre es obligatorio (mínimo 3 caracteres).</small>
-          }
-        </div>
-
-        <div class="form-group">
-          <label>RUC</label>
-          <input type="text" formControlName="ruc" placeholder="20123456789" />
-          @if (companyForm.get('ruc')?.invalid && companyForm.get('ruc')?.touched) {
-            <small class="error-text">El RUC debe tener 11 dígitos.</small>
-          }
-        </div>
-      </div>
-
-      <div class="form-grid">
-        <div class="form-group">
-          <label>Correo corporativo</label>
-          <input type="email" formControlName="correoCorporativo" placeholder="empresa@correo.com" />
-          @if (companyForm.get('correoCorporativo')?.invalid && companyForm.get('correoCorporativo')?.touched) {
-            <small class="error-text">Ingresa un correo válido.</small>
-          }
-        </div>
-
-        <div class="form-group">
-          <label>Teléfono</label>
-          <input type="text" formControlName="telefono" placeholder="987654321" />
-          @if (companyForm.get('telefono')?.invalid && companyForm.get('telefono')?.touched) {
-            <small class="error-text">Ingresa un teléfono válido (9 dígitos).</small>
-          }
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label>Dirección</label>
-        <input type="text" formControlName="direccion" placeholder="Av. Javier Prado 123" />
-        @if (companyForm.get('direccion')?.invalid && companyForm.get('direccion')?.touched) {
-          <small class="error-text">La dirección es obligatoria.</small>
-        }
-      </div>
-
-      <div class="form-group">
-        <label>Descripción</label>
-        <textarea rows="5" formControlName="descripcion" placeholder="Describe la empresa..."></textarea>
-        @if (companyForm.get('descripcion')?.invalid && companyForm.get('descripcion')?.touched) {
-          <small class="error-text">La descripción debe tener al menos 20 caracteres.</small>
-        }
-      </div>
-
-      <div class="form-actions">
-        <button type="submit" class="btn btn-primary" [disabled]="loading">
-          {{ loading ? 'Guardando...' : 'Guardar Perfil' }}
-        </button>
-      </div>
-    </form>
   </div>
 </div>

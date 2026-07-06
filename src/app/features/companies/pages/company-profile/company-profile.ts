@@ -22,7 +22,7 @@ export class CompanyProfile {
   loading = false;
 
   goBack(): void {
-    this.router.navigate(['/empresas']);
+    this.router.navigate(['/auth/register']);
   }
 
   companyForm = this.fb.group({

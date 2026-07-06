@@ -90,6 +90,6 @@ export class Home implements OnInit {
   }
 
   registerNow() {
-    this.router.navigate(['/registro']); // Cambia la ruta según como la tengas
+    this.router.navigate(['/auth/register']);
   }
 }
