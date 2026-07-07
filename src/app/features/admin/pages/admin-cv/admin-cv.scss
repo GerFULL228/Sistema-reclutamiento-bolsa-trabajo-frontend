@@ -1,0 +1,43 @@
+.dashboard-header {
+    margin-bottom: 24px;
+}
+
+.header-info h1 {
+    margin: 0;
+    font-size: 34px;
+    font-weight: 700;
+}
+
+.header-info p {
+    margin-top: 8px;
+    color: #64748b;
+}
+
+.toolbar {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.search-input {
+    flex: 1;
+    min-width: 240px;
+}
+
+.table-card {
+    background: white;
+    border-radius: 18px;
+    padding: 10px 20px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, .06);
+}
+
+.acciones {
+    display: flex;
+    gap: 4px;
+}
+
+.empty {
+    text-align: center;
+    color: #64748b;
+    padding: 30px 0;
+}

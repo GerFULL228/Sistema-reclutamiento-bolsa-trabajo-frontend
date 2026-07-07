@@ -1,0 +1,81 @@
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.header-info h1 {
+  margin: 0;
+  font-size: 34px;
+  font-weight: 700;
+}
+
+.header-info p {
+  margin-top: 8px;
+  color: #64748b;
+}
+
+.toolbar {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.search-input {
+  flex: 1;
+  min-width: 240px;
+}
+
+.estado-select {
+  min-width: 220px;
+}
+
+.table-card {
+  background: white;
+  border-radius: 18px;
+  padding: 10px 20px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, .06);
+}
+
+.empresa-cell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.empresa-cell div:last-child {
+  display: flex;
+  flex-direction: column;
+}
+
+.empresa-cell span {
+  font-size: 13px;
+  color: #64748b;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #0f5d74;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 13px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.acciones {
+  display: flex;
+  gap: 4px;
+}
+
+.empty {
+  text-align: center;
+  color: #64748b;
+  padding: 30px 0;
+}

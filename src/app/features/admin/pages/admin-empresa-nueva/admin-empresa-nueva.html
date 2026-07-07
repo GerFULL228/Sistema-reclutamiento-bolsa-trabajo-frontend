@@ -1,0 +1,100 @@
+<div class="company-container">
+    <div class="company-card">
+
+        <a routerLink="/dashboard/admin/empresas" class="volver">
+            <i class="pi pi-arrow-left"></i> Volver al listado
+        </a>
+
+        <div class="titulo-row">
+            <div>
+                <h1>Nueva empresa</h1>
+                <p>Se creará con estado "Pendiente" hasta que la valides.</p>
+            </div>
+        </div>
+
+        <form [formGroup]="empresaForm" (ngSubmit)="guardar()">
+
+            <div class="row">
+                <div class="form-group">
+                    <label>Nombre de la empresa *</label>
+                    <input pInputText type="text" formControlName="nombreEmpresa" />
+                    @if (campoInvalido('nombreEmpresa')) {
+                    <small class="error">El nombre debe tener al menos 3 caracteres.</small>
+                    }
+                </div>
+
+                <div class="form-group">
+                    <label>RUC *</label>
+                    <input pInputText type="text" formControlName="ruc" maxlength="11" />
+                    @if (campoInvalido('ruc')) {
+                    <small class="error">El RUC debe tener 11 dígitos numéricos.</small>
+                    }
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Razón social *</label>
+                <input pInputText type="text" formControlName="razonSocial" />
+                @if (campoInvalido('razonSocial')) {
+                <small class="error">La razón social es obligatoria.</small>
+                }
+            </div>
+
+            <div class="form-group">
+                <label>Dirección</label>
+                <input pInputText type="text" formControlName="direccion" />
+            </div>
+
+            <div class="form-group">
+                <label>Página web</label>
+                <input pInputText type="text" formControlName="paginaWeb" placeholder="https://..." />
+            </div>
+
+            <div class="form-group">
+                <label>Descripción</label>
+                <textarea pTextarea rows="4" formControlName="descripcion"></textarea>
+            </div>
+
+            <hr class="separador" />
+            <h3>Datos del usuario responsable</h3>
+
+            <div class="row">
+                <div class="form-group">
+                    <label>Nombre *</label>
+                    <input pInputText type="text" formControlName="nombreContacto" />
+                    @if (campoInvalido('nombreContacto')) {
+                    <small class="error">El nombre es obligatorio.</small>
+                    }
+                </div>
+
+                <div class="form-group">
+                    <label>Apellido *</label>
+                    <input pInputText type="text" formControlName="apellidoContacto" />
+                    @if (campoInvalido('apellidoContacto')) {
+                    <small class="error">El apellido es obligatorio.</small>
+                    }
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Correo *</label>
+                <input pInputText type="email" formControlName="email" />
+                @if (campoInvalido('email')) {
+                <small class="error">Ingresa un correo válido.</small>
+                }
+            </div>
+
+            <div class="form-group">
+                <label>Contraseña *</label>
+                <p-password formControlName="password" [toggleMask]="true" [feedback]="false" />
+                @if (campoInvalido('password')) {
+                <small class="error">La contraseña debe tener al menos 6 caracteres.</small>
+                }
+            </div>
+
+            <button pButton type="submit" [loading]="guardando" label="Crear empresa"></button>
+
+        </form>
+
+    </div>
+</div>

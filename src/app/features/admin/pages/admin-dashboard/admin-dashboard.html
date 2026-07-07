@@ -1,0 +1,80 @@
+<div class="dashboard-header">
+  <div class="header-info">
+    <h1>Panel de administración</h1>
+    <p>Resumen general de la plataforma</p>
+  </div>
+</div>
+
+<div class="stats">
+
+  <div class="card">
+    <div class="card-top">
+      <div class="icon blue">
+        <i class="pi pi-building"></i>
+      </div>
+    </div>
+    <h2>{{ stats().totalEmpresas }}</h2>
+    <h4>Empresas registradas</h4>
+    <small>Total en la plataforma</small>
+  </div>
+
+  <div class="card">
+    <div class="card-top">
+      <div class="icon orange"></div>
+    </div>
+    <h2>{{ stats().empresasPendientes }}</h2>
+    <h4>Pendientes de validar</h4>
+    <small>Requieren revisión</small>
+  </div>
+
+  <div class="card">
+    <div class="card-top">
+      <div class="icon green">
+        <i class="pi pi-check-circle"></i>
+      </div>
+    </div>
+    <h2>{{ stats().empresasActivas }}</h2>
+    <h4>Empresas activas</h4>
+    <small>Validadas</small>
+  </div>
+
+  <div class="card">
+    <div class="card-top">
+      <div class="icon purple">
+        <i class="pi pi-briefcase"></i>
+      </div>
+    </div>
+    <h2>{{ stats().totalOfertas }}</h2>
+    <h4>Ofertas publicadas</h4>
+    <small>En toda la plataforma</small>
+  </div>
+
+</div>
+
+<div class="dashboard-grid">
+
+  <div class="recent-card full">
+    <div class="card-header">
+      <h2>Últimas ofertas publicadas</h2>
+      <a routerLink="/dashboard/admin/ofertas">Ver todas</a>
+    </div>
+
+    @if (loading()) {
+      <p class="empty">Cargando...</p>
+    } @else if (ofertasRecientes().length === 0) {
+      <p class="empty">Todavía no hay ofertas publicadas.</p>
+    } @else {
+      @for (oferta of ofertasRecientes(); track oferta.id) {
+        <div class="applicant">
+          <div class="avatar">{{ oferta.nombreEmpresa.slice(0, 2).toUpperCase() }}</div>
+          <div>
+            <h4>{{ oferta.titulo }}</h4>
+            <span>{{ oferta.nombreEmpresa }} · {{ oferta.ubicacion }}</span>
+          </div>
+          <strong>{{ oferta.estado }}</strong>
+        </div>
+      }
+    }
+  </div>
+
+</div>

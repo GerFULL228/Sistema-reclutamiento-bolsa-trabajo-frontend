@@ -3,7 +3,7 @@ import { provideRouter } from '@angular/router';
 import { providePrimeNG } from 'primeng/config';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { ConfirmationService } from 'primeng/api';
-
+import { authInterceptor } from './core/interceptors/auth-interceptor';
 
 import { routes } from './app.routes';
 import Aura from '@primeuix/themes/aura';
@@ -17,9 +17,8 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideAnimations(),
     provideRouter(routes),
-    provideHttpClient(),
-    provideHttpClient(withInterceptors([])),
-     providePrimeNG({
+    provideHttpClient(withInterceptors([authInterceptor])),
+    providePrimeNG({
       theme: {
         preset: Aura,
         options: {
@@ -27,7 +26,7 @@ export const appConfig: ApplicationConfig = {
         }
       }
     }),
-  
+
     MessageService,
     ConfirmationService
   ]
