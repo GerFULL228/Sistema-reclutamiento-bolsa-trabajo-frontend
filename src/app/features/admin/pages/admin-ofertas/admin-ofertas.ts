@@ -81,9 +81,6 @@ export class AdminOfertas implements OnInit {
     });
   }
 
-  despues(): void {
-    this.messageService.showError('...');
-  }
 
   private eliminarOferta(oferta: Oferta): void {
     this.adminOfertaService.eliminar(oferta.id).subscribe({

@@ -98,8 +98,7 @@ export class AdminEmpresaDetalle implements OnInit {
         this.guardando.set(false);
         this.router.navigateByUrl('/dashboard/admin/empresas');
       },
-      error: (err) => {
-        this.messageService.showError(err.error?.message || 'No se pudo actualizar la empresa.');
+      error: () => {
         this.guardando.set(false);
       }
     });
@@ -127,8 +126,7 @@ export class AdminEmpresaDetalle implements OnInit {
         this.messageService.showSuccess(`Empresa marcada como ${estado}.`);
         this.procesando.set(false);
       },
-      error: (err) => {
-        this.messageService.showError(err.error?.message || 'No se pudo actualizar el estado.');
+      error: () => {
         this.procesando.set(false);
       }
     });

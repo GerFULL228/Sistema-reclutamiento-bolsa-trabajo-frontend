@@ -88,7 +88,6 @@ export class AdminCvDetalle implements OnInit {
         }
 
         if (!this.usuarioId) {
-            this.messageService.showError('No se pudo determinar el propietario del CV. Revisa el ajuste de backend indicado.');
             return;
         }
 
@@ -104,8 +103,7 @@ export class AdminCvDetalle implements OnInit {
                 this.guardando.set(false);
                 this.router.navigateByUrl('/dashboard/admin/cv');
             },
-            error: (err) => {
-                this.messageService.showError(err.error?.message || 'No se pudo actualizar el CV.');
+            error: () => {
                 this.guardando.set(false);
             }
         });
