@@ -8,7 +8,8 @@ export const OfertaStore = signalStore(
 
     withState<OfertaState>({
         ofertas: [],
-        loading: false
+        loading: false,
+        selected: null
     }),
 
     withMethods((store, service = inject(OfertaService)) => ({
@@ -28,6 +29,9 @@ export const OfertaStore = signalStore(
             patchState(store, { loading: true });
 
             service.listarEmpresa().subscribe((page) => {
+                console.log('Respuesta empresa:', page);
+                console.log('Contenido:', page.content);
+
                 patchState(store, {
                     ofertas: page.content,
                     loading: false
@@ -44,10 +48,26 @@ export const OfertaStore = signalStore(
                     loading: false
                 });
             });
+        },
+        loadById(id: number) {
+
+            patchState(store, {
+                loading: true
+            });
+
+            service.verDetalle(id)
+                .subscribe(oferta => {
+
+                    patchState(store, {
+                        selected: oferta,
+                        loading: false
+                    });
+
+                });
         }
     })),
-    withComputed((store)=> ({
-        ofertasDestacadas: () =>store.ofertas().slice(0, 4)
+    withComputed((store) => ({
+        ofertasDestacadas: () => store.ofertas().slice(0, 4)
     }))
 );
 

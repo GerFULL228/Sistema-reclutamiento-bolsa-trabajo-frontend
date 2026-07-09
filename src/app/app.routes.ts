@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
-import { CompanyProfile } from './features/companies/pages/company-profile/company-profile';
-import { EditCompany } from './features/companies/pages/edit-company/edit-company';
+
+import { authGuard } from './core/guards/auth-guard';
+import { rolGuardGuard } from './core/guards/rol-guard-guard';
 
 export const routes: Routes = [
   {
@@ -20,13 +21,7 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./features/auth/pages/register/register').then((p) => p.Register),
   },
-  {
-    path: 'auth/register/empresa',
-    loadComponent: () =>
-      import('./features/companies/pages/company-profile/company-profile').then(
-        (p) => p.CompanyProfile
-      ),
-  },
+  
   {
     path: 'auth/register/postulante',
     loadComponent: () =>
@@ -43,19 +38,15 @@ export const routes: Routes = [
   },
   {
     path: 'dashboard',
+    canActivate: [authGuard,rolGuardGuard],
+    data: { roles: ['ROLE_EMPRESA', 'ROLE_POSTULANTE', 'ROLE_ADMIN'] },
+
     loadChildren: () =>
       import('./layout/dashboard-layout/dashboard-layout.route').then(
         (p) => p.DASHBOARD_LAYOUT_ROUTE
       ),
   },
 
-  // Tus páginas
-  {
-    path: 'company-profile',
-    component: CompanyProfile,
-  },
-  {
-    path: 'edit-company',
-    component: EditCompany,
-  },
+ 
+  
 ];

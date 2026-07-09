@@ -1,5 +1,6 @@
 import { inject, Injectable } from "@angular/core";
 import { OfertaStore } from "./oferta.store";
+import { TokenService } from "../../../core/services/token/token";
 
 @Injectable({
   providedIn: 'root'
@@ -7,10 +8,13 @@ import { OfertaStore } from "./oferta.store";
 export class OfertaFacade {
 
   private store = inject(OfertaStore);
+  private authFacade = inject(TokenService);
 
-  ofertas = this.store.ofertas;
-  loading = this.store.loading;
-  ofertasDestacadas = this.store.ofertasDestacadas;
+  readonly ofertas = this.store.ofertas;
+  readonly loading = this.store.loading;
+readonly ofertaSeleccionada =
+  this.store.selected;
+  readonly ofertasDestacadas = this.store.ofertasDestacadas;
 
   cargarPublicas() {
     this.store.loadPublicas();
@@ -22,5 +26,31 @@ export class OfertaFacade {
 
   cargarAdmin() {
     this.store.loadAdmin();
+  }
+
+  cargarPorId(id: number) {
+    this.store.loadById(id);
+  }
+
+  cargarOfertas() {
+
+    const roles = this.authFacade.getRoles();
+
+    console.log('Roles:', roles);
+
+    if (roles.includes('ROLE_ADMIN')) {
+      console.log('ADMIN');
+      this.cargarAdmin();
+      return;
+    }
+
+    if (roles.includes('ROLE_EMPRESA')) {
+      console.log('EMPRESA');
+      this.cargarEmpresa();
+      return;
+    }
+
+    console.log('PUBLICAS');
+    this.cargarPublicas();
   }
 }

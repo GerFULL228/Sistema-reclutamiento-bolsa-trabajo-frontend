@@ -1,1 +1,11 @@
-<p>oferta-detail works!</p>
+@if (oferta && oferta()) {
+
+  <app-oferta-detail
+    [oferta]="oferta()!">
+  </app-oferta-detail>
+
+} @else {
+
+  <p>Cargando oferta...</p>
+
+}

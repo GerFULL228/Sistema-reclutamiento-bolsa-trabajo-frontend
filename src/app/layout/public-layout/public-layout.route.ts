@@ -19,8 +19,12 @@ export const PUBLIC_LAYOUT_ROUTE:Routes = [
             loadComponent : () => import('../../features/ofertas/catalogo/pages/oferta-list/oferta-list').then(p=>p.OfertaList)
           },
           {
+            path: 'empleos/:id',
+            loadComponent : () => import('../../features/ofertas/catalogo/pages/oferta-detail/oferta-detail').then(p=>p.OfertaDetailPage)
+          },
+          {
             path: 'empresas',
-            loadComponent : () => import('../../features/public/pages/empresas/empresas').then(p=>p.Empresas)
+            loadComponent : () => import('../../features/companies/catalogo/pages/empresa-list/empresa-list').then(p=>p.EmpresaList)
           },
           {
             path: 'contacto',
