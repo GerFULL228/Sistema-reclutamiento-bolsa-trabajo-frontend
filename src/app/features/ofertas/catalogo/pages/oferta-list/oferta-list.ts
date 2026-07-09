@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { OfertaFacade } from '../../../data-access/oferta.facade';
 import { OfertaCard } from '../../../ui/oferta-card/oferta-card';
 
@@ -8,7 +8,7 @@ import { OfertaCard } from '../../../ui/oferta-card/oferta-card';
   templateUrl: './oferta-list.html',
   styleUrl: './oferta-list.scss',
 })
-export class OfertaList {
+export class OfertaList implements OnInit {
 
    facade = inject(OfertaFacade);
 
@@ -16,8 +16,10 @@ export class OfertaList {
   loading = this.facade.loading;
 
   ngOnInit() {
-    this.facade.cargarPublicas();
+    
+    this.facade.cargarOfertas();
     console.log('Ofertas cargadas:', this.ofertas());
+    
   }
 
 }

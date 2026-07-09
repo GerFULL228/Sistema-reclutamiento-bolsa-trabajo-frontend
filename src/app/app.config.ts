@@ -10,6 +10,7 @@ import Aura from '@primeuix/themes/aura';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 
 import { MessageService } from 'primeng/api';
+import { authInterceptor } from './core/interceptors/auth-interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -18,7 +19,9 @@ export const appConfig: ApplicationConfig = {
     provideAnimations(),
     provideRouter(routes),
     provideHttpClient(),
-    provideHttpClient(withInterceptors([])),
+   provideHttpClient(
+      withInterceptors([authInterceptor])
+    ),
      providePrimeNG({
       theme: {
         preset: Aura,

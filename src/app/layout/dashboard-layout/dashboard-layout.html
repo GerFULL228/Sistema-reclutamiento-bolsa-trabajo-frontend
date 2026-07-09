@@ -1,52 +1,6 @@
 <div class="layout">
 
-  <aside class="sidebar">
-
-    <div class="logo">
-      TalentHub
-    </div>
-
-    <div class="company-info">
-      <div class="avatar">
-        TH
-      </div>
-
-      <div>
-        <h4>Tech Solutions</h4>
-        <span>Empresa</span>
-      </div>
-    </div>
-
-    <nav>
-
-      <a routerLink="/dashboard/company">
-        <i class="pi pi-home"></i>
-        Dashboard
-      </a>
-
-      <a routerLink="/dashboard/company-profile">
-        <i class="pi pi-building"></i>
-        Perfil Empresa
-      </a>
-
-      <a routerLink="/dashboard/jobs">
-        <i class="pi pi-briefcase"></i>
-        Mis Ofertas
-      </a>
-
-      <a routerLink="/dashboard/edit-company">
-        <i class="pi pi-pencil"></i>
-        Editar Empresa
-      </a>
-
-    </nav>
-
-    <button class="logout-btn" (click)="logout()">
-      <i class="pi pi-sign-out"></i>
-      Cerrar sesión
-    </button>
-
-  </aside>
+  <app-sidebar></app-sidebar>
 
   <main class="content">
     <router-outlet />

@@ -36,4 +36,12 @@ export class OfertaService {
   eliminar(id: number) {
     return this.http.delete(`${this.api}/ofertas/${id}`);
   }
+
+  verDetalle(id: number) {
+    return this.http.get<OfertaResponse>(`${this.api}/ofertas/${id}`);
+  }
+
+  actualizar(id: number, request: OfertaRequest) {
+    return this.http.put(`${this.api}/ofertas/${id}`, request);
+  }
 }

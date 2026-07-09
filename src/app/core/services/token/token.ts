@@ -51,7 +51,7 @@ export class TokenService {
     return !!this.getAccessToken();
   }
 
-  private getDecodeToken(): any | null {
+   getDecodeToken(): any | null {
     try {
 
       const token = this.getAccessToken();
@@ -66,7 +66,7 @@ export class TokenService {
     }
   }
 
-  getRoles(): string {
+  getRoles(): string[] {
     return this.getDecodeToken()?.roles || [];
   }
 
