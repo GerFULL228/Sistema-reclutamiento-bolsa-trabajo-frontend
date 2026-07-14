@@ -45,17 +45,22 @@ textarea,
   box-sizing: border-box;
   border-radius: 0.75rem;
   border: 1px solid #d1d5db;
-  padding: 0.85rem 1rem;
+  // Padding derecho extra para que el texto no quede debajo del ícono del ojo
+  // (PrimeNG 20 usa .p-password-toggle-mask-icon, no .p-password-toggle).
+  padding: 0.85rem 2.75rem 0.85rem 1rem;
   background: #f9fafb;
   color: #0f172a;
   font-size: 1rem;
   min-height: 3rem;
 }
 
-.p-password .p-password-toggle {
-  right: 0.75rem;
-  top: 50%;
-  transform: translateY(-50%);
+.p-password .p-password-toggle-mask-icon {
+  color: #6b7280;
+  cursor: pointer;
+
+  &:hover {
+    color: #1e5f74;
+  }
 }
 
 input,
@@ -64,6 +69,12 @@ textarea {
   border: 1px solid #d1d5db;
   padding: 0.85rem 1rem;
   background: #f9fafb;
+  box-sizing: border-box;
+  min-height: 3rem;
+}
+
+textarea {
+  min-height: unset;
 }
 
 button.p-button {

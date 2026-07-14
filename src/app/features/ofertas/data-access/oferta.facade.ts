@@ -1,5 +1,6 @@
 import { inject, Injectable } from "@angular/core";
 import { OfertaStore } from "./oferta.store";
+import { OfertaResponse } from "./oferta.model";
 import { TokenService } from "../../../core/services/token/token";
 
 @Injectable({
@@ -30,6 +31,10 @@ readonly ofertaSeleccionada =
 
   cargarPorId(id: number) {
     this.store.loadById(id);
+  }
+
+  actualizarOfertaLocal(id: number, cambios: Partial<OfertaResponse>) {
+    this.store.actualizarOfertaLocal(id, cambios);
   }
 
   cargarOfertas() {

@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { inject, Injectable } from "@angular/core";
-import { EmpresaOfertaStats, OfertaRequest, OfertaResponse, OfertaUpdateRequest } from "./oferta.model";
+import { EmpresaOfertaStats, OfertaEstadoUpdateRequest, OfertaRequest, OfertaResponse, OfertaUpdateRequest } from "./oferta.model";
 import { environment } from '../../../environment/environment';
 import { PageResponse } from "../../../shared/models/page.response";
 
@@ -52,5 +52,10 @@ export class OfertaService {
 
     actualizar(id: number, request: OfertaUpdateRequest) {
         return this.http.patch<OfertaResponse>(`${this.api}/empresa/ofertas/${id}`, request);
+    }
+
+    cambiarEstado(id: number, estado: string) {
+        const request: OfertaEstadoUpdateRequest = { estado };
+        return this.http.patch<OfertaResponse>(`${this.api}/empresa/ofertas/${id}/estado`, request);
     }
 }

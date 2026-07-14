@@ -1,5 +1,6 @@
 import { computed, inject } from "@angular/core"; // <-- IMPORTANTE: Agregamos computed
 import { OfertaService } from "./oferta.service";
+import { OfertaResponse } from "./oferta.model";
 import { OfertaState } from "./oferta.state";
 import { patchState, signalStore, withComputed, withMethods, withState } from '@ngrx/signals';
 
@@ -56,6 +57,14 @@ export const OfertaStore = signalStore(
                     selected: oferta,
                     loading: false
                 });
+            });
+        },
+
+        // Actualiza una oferta en memoria (ej. tras cambiar su estado) sin
+        // tener que recargar toda la lista desde el backend.
+        actualizarOfertaLocal(id: number, cambios: Partial<OfertaResponse>) {
+            patchState(store, {
+                ofertas: store.ofertas().map(o => o.id === id ? { ...o, ...cambios } : o)
             });
         }
     })),

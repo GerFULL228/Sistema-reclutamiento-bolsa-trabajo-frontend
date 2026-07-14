@@ -91,7 +91,7 @@
               <span class="cell-salario">S/ {{ oferta.salario | number }}</span>
             </td>
             <td>
-              <span class="tag-modalidad">Remoto</span>
+              <span class="tag-modalidad">{{ getModalidadLabel(oferta.modalidad) }}</span>
             </td>
             <td>
               <p-tag

@@ -161,6 +161,42 @@
   gap: 2px;
 }
 
+// ── Selector de estado (cambio rápido en la tabla) ────
+.estado-select {
+  appearance: none;
+  -webkit-appearance: none;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 5px 28px 5px 10px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #475569;
+  background: #f1f5f9 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 8px center;
+  background-size: 12px;
+  cursor: pointer;
+  transition: background-color .15s, color .15s;
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  &.is-activa {
+    background-color: #dcfce7;
+    color: #15803d;
+  }
+
+  &.is-cerrada {
+    background-color: #fee2e2;
+    color: #b91c1c;
+  }
+
+  &.is-pausada {
+    background-color: #fef9c3;
+    color: #a16207;
+  }
+}
+
 // ── Empty ─────────────────────────────────────────────
 .empty-state {
   padding: 3rem;

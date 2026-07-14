@@ -95,12 +95,21 @@
               <span class="cell-salario">S/ {{ oferta.salario | number }}</span>
             </td>
             <td>
-              <span class="tag-modalidad">Remoto</span>
+              <span class="tag-modalidad">{{ getModalidadLabel(oferta.modalidad) }}</span>
             </td>
             <td>
-              <p-tag
-                [value]="getEstadoLabel(oferta.estado)"
-                [severity]="getSeverity(oferta.estado)" />
+              <select
+                class="estado-select"
+                [class.is-activa]="oferta.estado === 'ACTIVA'"
+                [class.is-cerrada]="oferta.estado === 'CERRADA'"
+                [class.is-pausada]="oferta.estado === 'PAUSADA'"
+                [value]="oferta.estado"
+                [disabled]="cambiandoEstadoId === oferta.id"
+                (change)="cambiarEstado(oferta, $event)">
+                @for (op of estadosDisponibles; track op.value) {
+                  <option [value]="op.value">{{ op.label }}</option>
+                }
+              </select>
             </td>
             <td>
               <div class="cell-actions">

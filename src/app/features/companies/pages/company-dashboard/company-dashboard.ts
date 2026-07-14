@@ -101,4 +101,13 @@ export class CompanyDashboard implements OnInit {
       default: return estado;
     }
   }
+
+  getModalidadLabel(modalidad: string): string {
+    switch (modalidad) {
+      case 'PRESENCIAL': return 'Presencial';
+      case 'REMOTO': return 'Remoto';
+      case 'HIBRIDO': return 'Híbrido';
+      default: return modalidad;
+    }
+  }
 }

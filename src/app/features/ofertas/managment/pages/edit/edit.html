@@ -69,6 +69,17 @@
           </div>
 
           <div class="field">
+            <label for="modalidad">Modalidad *</label>
+            <p-select
+              inputId="modalidad"
+              formControlName="modalidad"
+              [options]="modalidadesDisponibles"
+              optionLabel="label"
+              optionValue="value"
+              styleClass="w-full" />
+          </div>
+
+          <div class="field">
             <label for="estado">Estado *</label>
             <p-select
               inputId="estado"

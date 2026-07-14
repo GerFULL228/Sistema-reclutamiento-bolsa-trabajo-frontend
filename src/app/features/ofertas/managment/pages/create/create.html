@@ -75,6 +75,21 @@
             <small class="error">El salario debe ser mayor a 0.</small>
           }
         </div>
+
+        <div class="field">
+          <label for="modalidad">Modalidad *</label>
+          <p-select
+            inputId="modalidad"
+            formControlName="modalidad"
+            [options]="modalidadesDisponibles"
+            optionLabel="label"
+            optionValue="value"
+            placeholder="Selecciona una modalidad"
+            styleClass="w-full" />
+          @if (tieneError('modalidad', 'required')) {
+            <small class="error">La modalidad es obligatoria.</small>
+          }
+        </div>
       </div>
 
       <div class="form-actions">

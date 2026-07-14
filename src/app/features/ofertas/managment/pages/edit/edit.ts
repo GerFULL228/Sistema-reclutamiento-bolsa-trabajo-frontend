@@ -47,11 +47,18 @@ export class Edit implements OnInit {
     { label: 'Cerrada', value: 'CERRADA' },
   ];
 
+  modalidadesDisponibles = [
+    { label: 'Presencial', value: 'PRESENCIAL' },
+    { label: 'Remoto', value: 'REMOTO' },
+    { label: 'Híbrido', value: 'HIBRIDO' },
+  ];
+
   ofertaForm = this.fb.group({
     titulo: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(150)]],
     descripcion: ['', [Validators.required, Validators.minLength(10)]],
     ubicacion: ['', [Validators.required]],
     salario: [0, [Validators.required, Validators.min(1)]],
+    modalidad: ['PRESENCIAL', [Validators.required]],
     estado: ['ACTIVA', [Validators.required]],
   });
 
@@ -69,6 +76,7 @@ export class Edit implements OnInit {
           descripcion: oferta.descripcion,
           ubicacion: oferta.ubicacion,
           salario: oferta.salario,
+          modalidad: oferta.modalidad,
           estado: oferta.estado,
         });
         this.loading = false;

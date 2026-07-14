@@ -5,6 +5,7 @@ import { LoginRequest } from '../../models/LoginRequest';
 import { Observable, tap } from 'rxjs';
 import { LoginResponse } from '../../models/LoginResponse';
 import { EmpresaRegisterRequest } from '../../models/EmpresaRegisterRequest';
+import { PostulanteRegisterRequest } from '../../models/PostulanteRegisterRequest';
 import { environment } from '../../../../environment/environment';
 
 @Injectable({
@@ -26,7 +27,7 @@ export class AuthService {
     )
   }
 
-  registerPostulante(data: any): Observable<any> {
+  registerPostulante(data: PostulanteRegisterRequest): Observable<any> {
     return this.http.post(`${this.baseApiUrl}/usuarios/postulante/register`, data); 
   }
 
