@@ -48,7 +48,18 @@ export class TokenService {
   }
 
   isLoggead(): boolean {
-    return !!this.getAccessToken();
+    return !!this.getAccessToken() && !this.isTokenExpired();
+  }
+
+  isTokenExpired(): boolean {
+    const decoded = this.getDecodeToken();
+
+    if (!decoded || !decoded.exp) {
+      return false;
+    }
+
+    const ahoraEnSegundos = Math.floor(Date.now() / 1000);
+    return decoded.exp < ahoraEnSegundos;
   }
 
    getDecodeToken(): any | null {

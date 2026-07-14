@@ -1,12 +1,13 @@
 <div class="page">
 
- 
-  <div class="page-header">
+  <p-toast />
+
+ <div class="page-header">
     <div class="page-title">
       <h1>Ofertas laborales</h1>
       <p>Gestiona las ofertas publicadas por tu empresa</p>
     </div>
-    <button pButton label="Nueva oferta" icon="pi pi-plus" class="btn-primary"></button>
+    <button pButton label="Nueva oferta" icon="pi pi-plus" class="btn-primary" (click)="irACrear()"></button>
   </div>
 
 
@@ -98,19 +99,20 @@
             </td>
             <td>
               <p-tag
-                [value]="oferta.estado ? 'Activa' : 'Cerrada'"
+                [value]="getEstadoLabel(oferta.estado)"
                 [severity]="getSeverity(oferta.estado)" />
             </td>
             <td>
               <div class="cell-actions">
                 <button
                   pButton
-                  icon="pi pi-eye"
+                  icon="pi pi-users"
                   [text]="true"
                   [rounded]="true"
                   severity="secondary"
-                  pTooltip="Ver detalle"
-                  tooltipPosition="top"></button>
+                  pTooltip="Ver postulantes"
+                  tooltipPosition="top"
+                  (click)="verPostulantes(oferta.id)"></button>
                 <button
                   pButton
                   icon="pi pi-pencil"
@@ -118,15 +120,18 @@
                   [rounded]="true"
                   severity="secondary"
                   pTooltip="Editar"
-                  tooltipPosition="top"></button>
+                  tooltipPosition="top"
+                  (click)="editar(oferta.id)"></button>
                 <button
                   pButton
                   icon="pi pi-trash"
                   [text]="true"
                   [rounded]="true"
                   severity="danger"
+                  [loading]="eliminandoId === oferta.id"
                   pTooltip="Eliminar"
-                  tooltipPosition="top"></button>
+                  tooltipPosition="top"
+                  (click)="eliminar(oferta.id)"></button>
               </div>
             </td>
           </tr>

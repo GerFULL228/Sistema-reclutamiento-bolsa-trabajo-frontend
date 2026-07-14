@@ -1,59 +1,64 @@
-import { Component, computed, inject } from '@angular/core';
-
+import { Component, OnInit, inject, signal } from '@angular/core';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { TokenService } from '../../../../core/services/token/token';
-import { MENU_ITEMS } from '../../../../core/config/menu.config';
-import { RouterLink, Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [ RouterLink],
+  imports: [RouterLink, RouterLinkActive],
   templateUrl: './sidebar.html',
-  styleUrls: ['./sidebar.scss'],
+  styleUrl: './sidebar.scss' // Manteniendo tu diseño original intacto
 })
-export class Sidebar {
-
-  private tokenService = inject(TokenService);
+export class Sidebar implements OnInit {
   private router = inject(Router);
-  readonly rol = this.tokenService.getRoles();
-  private token = computed(() => this.tokenService.getDecodeToken());
-  readonly menuItems = computed(() => {
+  private tokenService = inject(TokenService);
 
-    const roles = this.tokenService.getRoles();
+  // Variables reactivas (Signals) que tu HTML original espera
+  menuItems = signal<any[]>([]);
+  nombreUsuario = signal<string>('Usuario');
+  rolUsuario = signal<string>('Desconocido');
+  iniciales = signal<string>('U');
 
+  ngOnInit(): void {
+    // Leemos los datos que guardamos en el login
+    const rol = localStorage.getItem('user_role') || 'POSTULANTE'; // Valor por defecto por si acaso
+    const nombre = localStorage.getItem('user_name') || 'Juan Perez'; // Nombre temporal si no hay
+    
+    // Seteamos las variables del UI
+    this.rolUsuario.set(rol);
+    this.nombreUsuario.set(nombre);
+    this.iniciales.set(nombre.charAt(0).toUpperCase());
 
+    // Asignamos el menú respetando tu estructura de rutas
+  if (rol.includes('POSTULANTE')) {
+  this.menuItems.set([
+    { label: 'Buscar Empleos', icon: 'pi pi-briefcase', route: '/dashboard/ofertas' },
+    { label: 'Mis Postulaciones', icon: 'pi pi-file-check', route: '/dashboard/postulaciones' },
+    { label: 'Mi Perfil / CV', icon: 'pi pi-user-edit', route: '/dashboard/perfil' }
+  ]);
 
-    const items = MENU_ITEMS.filter(item =>
-      roles.some(r => item.roles.includes(r))
-    );
-
-
-
-    return items;
-  });
+  
+  } else if (rol.includes('EMPRESA')) {
+      this.menuItems.set([
+        { label: 'Panel de Control', icon: 'pi pi-chart-bar', route: '/dashboard/empresa' },
+        { label: 'Publicar Empleo', icon: 'pi pi-plus-circle', route: '/dashboard/jobs/create' },
+        { label: 'Gestionar Ofertas', icon: 'pi pi-list', route: '/dashboard/jobs' },
+        { label: 'Configuración de Cuenta', icon: 'pi pi-cog', route: '/dashboard/empresa/perfil' }
+      ]);
+    } else if (rol.includes('ADMIN')) {
+      this.menuItems.set([
+        { label: 'Panel Admin', icon: 'pi pi-sliders-h', route: '/dashboard/admin' },
+        { label: 'Validar Empresas', icon: 'pi pi-building', route: '/dashboard/admin/empresas' }
+      ]);
+    }
+  }
 
   logout(): void {
-    localStorage.clear();
-    this.router.navigateByUrl('/home');
+    // Limpia tokens en localStorage y también el signal de permisos en memoria,
+    // evitando que queden datos de la sesión anterior si otro usuario inicia sesión después.
+    this.tokenService.clearTokens();
+    localStorage.removeItem('user_role');
+    localStorage.removeItem('user_name');
+    this.router.navigate(['/auth/login']);
   }
-  nombreUsuario = computed(() => {
-    const t = this.token();
-    return `${t?.nombre ?? ''} ${t?.apellido ?? ''}`.trim() || t?.sub || 'Usuario';
-  });
-
-  rolUsuario = computed(() => {
-    const t = this.token();
-    const roles: string[] = t?.roles || [];
-    const rol = roles[0] || '';
-   
-    return rol.replace('ROLE_', '').charAt(0).toUpperCase() +
-      rol.replace('ROLE_', '').slice(1).toLowerCase();
-  });
-
-  iniciales = computed(() => {
-    const t = this.token();
-    const n = t?.nombre?.[0] || '';
-    const a = t?.apellido?.[0] || '';
-    return (n + a).toUpperCase() || 'US';
-  });
 }

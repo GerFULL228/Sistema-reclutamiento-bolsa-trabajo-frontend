@@ -1,191 +1,132 @@
-<div class="dashboard-header">
+<div class="page">
 
-  <div class="header-info">
-    <h1>Panel de empresa</h1>
-    <p>Resumen de tu actividad de reclutamiento</p>
+  <div class="page-header">
+    <div class="page-title">
+      <h1>Panel de Control</h1>
+      <p>Resumen de las ofertas publicadas por tu empresa</p>
+    </div>
+    <button pButton label="Nueva oferta" icon="pi pi-plus" class="btn-primary" (click)="irACrear()"></button>
   </div>
 
-  <button class="new-job-btn">
-    + Nueva oferta
-  </button>
-
-</div>
-
-<div class="stats">
-
-  <div class="card">
-    <div class="card-top">
-      <div class="icon blue">
-        <i class="pi pi-briefcase"></i>
-      </div>
-
-      <span class="trend">↗</span>
+  <div class="metrics">
+    <div class="metric-card">
+      <span class="metric-label">Total ofertas</span>
+      <span class="metric-value">{{ stats().totalOfertas }}</span>
     </div>
-
-    <h2>{{stats.jobs}}</h2>
-    <h4>Ofertas activas</h4>
-    <small>+1 esta semana</small>
+    <div class="metric-card activas">
+      <span class="metric-label">Activas</span>
+      <span class="metric-value">{{ stats().activas }}</span>
+    </div>
+    <div class="metric-card cerradas">
+      <span class="metric-label">Cerradas</span>
+      <span class="metric-value">{{ stats().cerradas }}</span>
+    </div>
   </div>
 
-  <div class="card">
+  <div class="table-card">
 
-    <div class="card-top">
-      <div class="icon purple">
-        <i class="pi pi-users"></i>
-      </div>
-
-      <span class="trend">↗</span>
+    <div class="table-toolbar">
+      <p-iconfield>
+        <p-inputicon styleClass="pi pi-search" />
+        <input
+          pInputText
+          placeholder="Buscar por título, empresa o ubicación..."
+          (input)="onSearch($event)"
+          class="search-input" />
+      </p-iconfield>
     </div>
 
-    <h2>{{stats.applicants}}</h2>
-    <h4>Total postulantes</h4>
-    <small>+14 hoy</small>
+    @if (loading()) {
+      <div class="skeleton-wrap">
+        @for (i of [1,2,3,4,5]; track i) {
+          <p-skeleton height="52px" styleClass="mb-2" borderRadius="10px" />
+        }
+      </div>
+    } @else {
+      <p-table
+        [value]="ofertasFiltradas()"
+        [paginator]="true"
+        [rows]="8"
+        [rowsPerPageOptions]="[8, 15, 30]"
+        [showCurrentPageReport]="true"
+        currentPageReportTemplate="{first}–{last} de {totalRecords} ofertas"
+        styleClass="p-datatable-sm custom-table"
+        [rowHover]="true"
+        dataKey="id">
+
+        <ng-template pTemplate="header">
+          <tr>
+            <th pSortableColumn="titulo">Título <p-sortIcon field="titulo" /></th>
+            <th pSortableColumn="nombreEmpresa">Empresa <p-sortIcon field="nombreEmpresa" /></th>
+            <th>Ubicación</th>
+            <th pSortableColumn="salario">Salario <p-sortIcon field="salario" /></th>
+            <th>Modalidad</th>
+            <th pSortableColumn="estado">Estado <p-sortIcon field="estado" /></th>
+            <th>Acciones</th>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-oferta>
+          <tr>
+            <td>
+              <div class="cell-titulo">
+                <span class="titulo">{{ oferta.titulo }}</span>
+              </div>
+            </td>
+            <td>
+              <div class="cell-empresa">
+                <div class="empresa-avatar">
+                  {{ oferta.nombreEmpresa?.[0]?.toUpperCase() }}
+                </div>
+                <span>{{ oferta.nombreEmpresa }}</span>
+              </div>
+            </td>
+            <td>
+              <span class="cell-ubicacion">
+                <i class="pi pi-map-marker"></i>
+                {{ oferta.ubicacion }}
+              </span>
+            </td>
+            <td>
+              <span class="cell-salario">S/ {{ oferta.salario | number }}</span>
+            </td>
+            <td>
+              <span class="tag-modalidad">Remoto</span>
+            </td>
+            <td>
+              <p-tag
+                [value]="getEstadoLabel(oferta.estado)"
+                [severity]="getSeverity(oferta.estado)" />
+            </td>
+            <td>
+              <div class="cell-actions">
+                <button
+                  pButton
+                  icon="pi pi-users"
+                  [text]="true"
+                  [rounded]="true"
+                  severity="secondary"
+                  pTooltip="Ver postulantes"
+                  tooltipPosition="top"
+                  (click)="verPostulantes(oferta.id)"></button>
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td colspan="7">
+              <div class="empty-state">
+                <i class="pi pi-inbox"></i>
+                <p>No se encontraron ofertas</p>
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+
+      </p-table>
+    }
 
   </div>
-
-  <div class="card">
-
-    <div class="card-top">
-      <div class="icon green">
-        <i class="pi pi-calendar"></i>
-      </div>
-
-      <span class="trend">↗</span>
-    </div>
-
-    <h2>{{stats.interviews}}</h2>
-    <h4>Entrevistas prog.</h4>
-    <small>Esta semana</small>
-
-  </div>
-
-  <div class="card">
-
-    <div class="card-top">
-      <div class="icon orange">
-        <i class="pi pi-user-plus"></i>
-      </div>
-
-      <span class="trend">↗</span>
-    </div>
-
-    <h2>{{stats.hires}}</h2>
-    <h4>Contrataciones</h4>
-    <small>Este mes</small>
-
-  </div>
-
-</div>
-
-<!-- Seccion central -->
-<div class="dashboard-grid">
-
-  <div class="chart-card">
-
-    <div class="card-header">
-
-      <div>
-        <h2>Postulantes por mes</h2>
-        <p>Últimos 6 meses</p>
-      </div>
-
-      <span class="growth">↗ +34%</span>
-
-    </div>
-
-    <div class="fake-chart">
-
-      <div class="line"></div>
-
-      <div class="months">
-
-        <span>Ene</span>
-        <span>Feb</span>
-        <span>Mar</span>
-        <span>Abr</span>
-        <span>May</span>
-        <span>Jun</span>
-
-      </div>
-
-    </div>
-
-  </div>
-
-  <div class="recent-card">
-
-    <div class="card-header">
-
-      <h2>Postulaciones recientes</h2>
-
-      <a href="#">Ver todas</a>
-
-    </div>
-
-    <div class="applicant">
-
-      <div class="avatar">CR</div>
-
-      <div>
-
-        <h4>Carlos Ramos</h4>
-
-        <span>Senior Frontend Developer</span>
-
-      </div>
-
-      <strong>92%</strong>
-
-    </div>
-
-    <div class="applicant">
-
-      <div class="avatar">AP</div>
-
-      <div>
-
-        <h4>Ana Pérez</h4>
-
-        <span>UX Designer</span>
-
-      </div>
-
-      <strong>87%</strong>
-
-    </div>
-
-    <div class="applicant">
-
-      <div class="avatar">LT</div>
-
-      <div>
-
-        <h4>Luis Torres</h4>
-
-        <span>Frontend Developer</span>
-
-      </div>
-
-      <strong>81%</strong>
-
-    </div>
-
-    <div class="applicant">
-
-      <div class="avatar">RM</div>
-
-      <div>
-
-        <h4>Rosa Medina</h4>
-
-        <span>Product Manager</span>
-
-      </div>
-
-      <strong>78%</strong>
-
-    </div>
-
-  </div>
-
 </div>

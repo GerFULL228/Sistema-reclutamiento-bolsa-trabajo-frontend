@@ -4,15 +4,28 @@ export interface OfertaResponse {
     descripcion: string;
     ubicacion: string;
     salario: number;
-    estado: boolean;
+    estado: string;
     nombreEmpresa: string;
 }
-
 
 export interface OfertaRequest {
     titulo: string;
     descripcion: string;
     ubicacion: string;
     salario: number;
-    estado: boolean;
+}
+
+// Update parcial: el backend acepta cualquier subconjunto de estos campos (PATCH).
+export interface OfertaUpdateRequest {
+    titulo?: string;
+    descripcion?: string;
+    ubicacion?: string;
+    salario?: number;
+    estado?: string;
+}
+
+export interface EmpresaOfertaStats {
+    totalOfertas: number;
+    activas: number;
+    cerradas: number;
 }

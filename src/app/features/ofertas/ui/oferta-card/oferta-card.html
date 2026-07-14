@@ -1,4 +1,4 @@
-<div class="card_contenedor"   [routerLink]="['/empleos/', oferta.id]">
+<div class="card_contenedor" [routerLink]="['/dashboard/ofertas', oferta.id]">
 
   <div class="header">
 
@@ -13,9 +13,9 @@
 
     <span
       class="estado"
-      [class.activo]="oferta.estado"
-      [class.inactivo]="!oferta.estado">
-      {{ oferta.estado ? 'Activo' : 'Cerrado' }}
+      [class.activo]="isActiva"
+      [class.inactivo]="!isActiva">
+      {{ estadoLabel }}
     </span>
 
   </div>
@@ -29,7 +29,7 @@
 
     <div class="footer">
       <span class="tag">Remoto</span>
-      <span class="fecha">Hace 2 días</span>
+      <span class="fecha">Ver detalle →</span>
     </div>
 
   </div>

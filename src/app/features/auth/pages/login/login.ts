@@ -38,37 +38,61 @@ export class Login {
 
 
   login() {
-    this.loading = true;
     if (this.loginForm.invalid) {
-      this.loading = false;
       this.loginForm.markAllAsTouched();
-      this.messageService.showError('Por favor, complete todos los campos correctamente.');
-
+      this.messageService.showError('Por favor, ingresa credenciales válidas.');
       return;
     }
 
-    this.authService.login(this.loginForm.getRawValue())
-      .subscribe({
-        next: (res) => {
-          const returnUrl = this.route.snapshot.queryParams['returnUrl'];
+    this.loading = true;
+    const credentials = this.loginForm.getRawValue();
 
-          const home = this.tokenService.getHomeByRole();
+    this.authService.login(credentials).subscribe({
+      next: (res: any) => {
+        this.loading = false;
+        this.messageService.showSuccess('¡Inicio de sesión correcto!');
 
-          this.router.navigate([returnUrl || home], {
-            replaceUrl: true
-          });
-          this.loading = false;
-          console.log('Login successful:', res);
+        const userRole = res.rol || res.role || res.usuario?.rol?.nombre || (res.roles ? res.roles[0] : null);
+        const roleUpper = userRole ? userRole.toUpperCase() : '';
 
-
-        },
-        error: (err) => {
-          this.errorMessage = err.error?.message || 'Error de conexion con el servidor';
-          this.loading = false;
-          this.messageService.showError(this.errorMessage);
+        // NUEVO: Guardamos el rol en el almacenamiento local para uso global de la UI
+        localStorage.setItem('user_role', roleUpper);
+        const userName = res.usuario?.nombre ? `${res.usuario.nombre} ${res.usuario.apellido || ''}` : 'Usuario';
+        localStorage.setItem('user_name', userName.trim());
+        // También guardamos el ID del usuario o de la empresa/postulante si tu back lo manda, útil para las peticiones
+        if (res.usuario?.id) {
+          localStorage.setItem('user_id', res.usuario.id);
         }
-      });
 
+        if (roleUpper.includes('POSTULANTE') || roleUpper.includes('EMPRESA') || roleUpper.includes('ADMIN')) {
+          this.router.navigate(['/dashboard']);
+        } else {
+          this.messageService.showWarn('Rol desconocido. Redirigiendo al inicio...');
+          this.router.navigate(['/']);
+        }
+
+
+        /*
+        if (roleUpper.includes('POSTULANTE')) {
+          this.router.navigate(['/dashboard-postulante']);
+        } else if (roleUpper.includes('EMPRESA')) {
+          this.router.navigate(['/company-dashboard']);   
+        } else if (roleUpper.includes('ADMIN')) {
+          this.router.navigate(['/dashboard-admin']);
+        } else {
+      
+          this.router.navigate(['/']);
+        }*/
+
+
+      },
+      error: (err) => {
+        this.loading = false;
+        console.error('Error en el Login:', err);
+        const errorMsg = err.error?.message || 'Credenciales incorrectas o problema de comunicación con el servidor.';
+        this.messageService.showError(errorMsg);
+      }
+    });
   }
 
 
