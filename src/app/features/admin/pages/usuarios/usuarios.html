@@ -18,7 +18,9 @@
       <p-tab value="1">
         <i class="pi pi-building"></i>
         Empresas
-        @if (empresasPendientesCount() > 0) {
+        @if (loadingPendientesCount()) {
+          <p-skeleton shape="circle" width="18px" height="18px" styleClass="tab-badge-skeleton" />
+        } @else if (empresasPendientesCount() > 0) {
           <span class="tab-badge">{{ empresasPendientesCount() }}</span>
         }
       </p-tab>

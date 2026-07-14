@@ -8,20 +8,31 @@
     <button pButton label="Nueva oferta" icon="pi pi-plus" class="btn-primary" (click)="irACrear()"></button>
   </div>
 
-  <div class="metrics">
-    <div class="metric-card">
-      <span class="metric-label">Total ofertas</span>
-      <span class="metric-value">{{ stats().totalOfertas }}</span>
+  @if (loadingStats()) {
+    <div class="metrics">
+      @for (i of [1,2,3]; track i) {
+        <div class="metric-card">
+          <p-skeleton width="60%" height="14px" styleClass="mb-2" />
+          <p-skeleton width="40%" height="28px" />
+        </div>
+      }
     </div>
-    <div class="metric-card activas">
-      <span class="metric-label">Activas</span>
-      <span class="metric-value">{{ stats().activas }}</span>
+  } @else {
+    <div class="metrics">
+      <div class="metric-card">
+        <span class="metric-label">Total ofertas</span>
+        <span class="metric-value">{{ stats().totalOfertas }}</span>
+      </div>
+      <div class="metric-card activas">
+        <span class="metric-label">Activas</span>
+        <span class="metric-value">{{ stats().activas }}</span>
+      </div>
+      <div class="metric-card cerradas">
+        <span class="metric-label">Cerradas</span>
+        <span class="metric-value">{{ stats().cerradas }}</span>
+      </div>
     </div>
-    <div class="metric-card cerradas">
-      <span class="metric-label">Cerradas</span>
-      <span class="metric-value">{{ stats().cerradas }}</span>
-    </div>
-  </div>
+  }
 
   <div class="table-card">
 

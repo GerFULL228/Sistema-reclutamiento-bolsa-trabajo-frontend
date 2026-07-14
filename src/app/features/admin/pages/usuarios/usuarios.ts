@@ -102,6 +102,7 @@ export class Usuarios implements OnInit {
   // Conteo global de empresas pendientes (independiente de los filtros de la tabla),
   // usado en el badge de la pestaña "Empresas".
   empresasPendientesCount = signal(0);
+  loadingPendientesCount = signal(true);
 
   ngOnInit(): void {
     this.cargarPostulantes();
@@ -110,9 +111,16 @@ export class Usuarios implements OnInit {
   }
 
   cargarConteoPendientes(): void {
+    this.loadingPendientesCount.set(true);
     this.adminService.contarEmpresasPendientes().subscribe({
-      next: (count) => this.empresasPendientesCount.set(count),
-      error: () => this.empresasPendientesCount.set(0)
+      next: (count) => {
+        this.empresasPendientesCount.set(count);
+        this.loadingPendientesCount.set(false);
+      },
+      error: () => {
+        this.empresasPendientesCount.set(0);
+        this.loadingPendientesCount.set(false);
+      }
     });
   }
 

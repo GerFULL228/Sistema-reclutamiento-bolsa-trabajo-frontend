@@ -24,6 +24,9 @@ export class PanelControl implements OnInit {
   usuarios = signal<UsuarioAdmin[]>([]);
   mensajes = signal<MensajeContacto[]>([]);
   loading = signal(true);
+  // Loading independiente para las 4 tarjetas de métricas (dependen de "usuarios"),
+  // así no muestran "0" mientras el request todavía está en vuelo.
+  loadingMetrics = signal(true);
 
   totalPostulantes = computed(() => this.usuarios().filter(u => u.rol === 'POSTULANTE').length);
   totalEmpresas = computed(() => this.usuarios().filter(u => u.rol === 'EMPRESA').length);
@@ -38,10 +41,17 @@ export class PanelControl implements OnInit {
 
   cargarDatos(): void {
     this.loading.set(true);
+    this.loadingMetrics.set(true);
 
     this.adminService.listarUsuarios({ page: 0, size: 500 }).subscribe({
-      next: (res) => this.usuarios.set(res.content),
-      error: () => this.usuarios.set([])
+      next: (res) => {
+        this.usuarios.set(res.content);
+        this.loadingMetrics.set(false);
+      },
+      error: () => {
+        this.usuarios.set([]);
+        this.loadingMetrics.set(false);
+      }
     });
 
     this.adminService.listarMensajes(0, 500).subscribe({

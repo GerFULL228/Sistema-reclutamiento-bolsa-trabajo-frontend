@@ -46,6 +46,7 @@ export class CompanyDashboard implements OnInit {
   readonly loading = this.facade.loading;
 
   stats = signal<EmpresaOfertaStats>({ totalOfertas: 0, activas: 0, cerradas: 0 });
+  loadingStats = signal(true);
 
   searchValue = signal('');
 
@@ -65,9 +66,13 @@ export class CompanyDashboard implements OnInit {
   }
 
   cargarEstadisticas(): void {
+    this.loadingStats.set(true);
     this.ofertaService.obtenerEstadisticasEmpresa().subscribe({
-      next: (stats) => this.stats.set(stats),
-      error: () => {}
+      next: (stats) => {
+        this.stats.set(stats);
+        this.loadingStats.set(false);
+      },
+      error: () => this.loadingStats.set(false)
     });
   }
 
