@@ -49,8 +49,9 @@ export class Sidebar implements OnInit {
       ]);
     } else if (rol.includes('ADMIN')) {
       this.menuItems.set([
-        { label: 'Panel Admin', icon: 'pi pi-sliders-h', route: '/dashboard/admin' },
-        { label: 'Validar Empresas', icon: 'pi pi-building', route: '/dashboard/admin/empresas' }
+        { label: 'Panel de Control', icon: 'pi pi-sliders-h', route: '/dashboard/admin' },
+        { label: 'Gestión de Usuarios', icon: 'pi pi-users', route: '/dashboard/admin/usuarios' },
+        { label: 'Mensajes de Contacto', icon: 'pi pi-envelope', route: '/dashboard/admin/mensajes' }
       ]);
     }
   }

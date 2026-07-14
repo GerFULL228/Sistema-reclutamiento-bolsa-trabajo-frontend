@@ -32,7 +32,7 @@ export class DashboardHome implements OnInit {
     if (roles.includes('ROLE_EMPRESA')) {
       this.router.navigate(['/dashboard/empresa']);
     } else if (roles.includes('ROLE_ADMIN')) {
-      this.router.navigate(['/dashboard/jobs']);
+      this.router.navigate(['/dashboard/admin']);
     } else {
       // Por defecto (ROLE_POSTULANTE u otro rol), mostramos "Buscar Empleos"
       this.router.navigate(['/dashboard/ofertas']);

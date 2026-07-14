@@ -59,6 +59,13 @@ export const DASHBOARD_LAYOUT_ROUTE: Routes = [
         loadComponent: () => import('../../features/companies/pages/perfil-empresa/perfil-empresa').then(c => c.PerfilEmpresa),
         canActivate: [rolGuardGuard],
         data: { roles: ['ROLE_EMPRESA'] }
+      },
+      // RUTAS PARA ADMIN: Panel de Control, Gestión de Usuarios y Mensajes de Contacto
+      {
+        path: 'admin',
+        loadChildren: () => import('../../features/admin/admin.route').then(c => c.ADMIN_ROUTE),
+        canActivate: [rolGuardGuard],
+        data: { roles: ['ROLE_ADMIN'] }
       }
     ]
   }

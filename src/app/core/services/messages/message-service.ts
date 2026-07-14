@@ -17,8 +17,8 @@ export class MessageServices {
         this.messageService.add({ severity: 'warn', summary: 'Warn', detail });
     }
 
-    showError(detail: string) {
-        this.messageService.add({ severity: 'error', summary: 'Error', detail });
+    showError(detail: string, life?: number) {
+        this.messageService.add({ severity: 'error', summary: 'Error', detail, life });
     }
 
     showContrast(detail: string) {

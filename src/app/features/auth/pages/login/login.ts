@@ -82,6 +82,23 @@ export class Login {
       error: (err) => {
         this.loading = false;
         console.error('Error en el Login:', err);
+
+        // Cuenta deshabilitada por un administrador (código específico "ACCOUNT_DISABLED"
+        // que devuelve el backend con 403): mostramos el mensaje exacto solicitado y
+        // redirigimos automáticamente a /contacto para que el usuario pueda escribirnos.
+        if (err.error?.code === 'ACCOUNT_DISABLED') {
+          this.messageService.showError(
+            'Hola, tu cuenta ha sido deshabilitada por un administrador. Por favor contáctate con nosotros si crees que es un error.',
+            5000
+          );
+
+          setTimeout(() => {
+            this.router.navigate(['/contacto']);
+          }, 4000);
+
+          return;
+        }
+
         const errorMsg = err.error?.message || 'Credenciales incorrectas o problema de comunicación con el servidor.';
         this.messageService.showError(errorMsg);
       }
