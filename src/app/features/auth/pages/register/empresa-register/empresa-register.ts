@@ -77,7 +77,10 @@ export class EmpresaRegister {
     this.authService.registerEmpresa(dataToSend).subscribe({
       next: () => {
         this.loading = false;
-        this.messageService.showSuccess('¡Empresa registrada con éxito! Ya puedes iniciar sesión.');
+        this.messageService.showSuccess(
+          'Tu cuenta como empresa ha sido creada. Podrás iniciar sesión una vez que el administrador haya verificado tu cuenta.',
+          6000,
+        );
         this.router.navigate(['/auth/login']);
       },
       error: (err) => {

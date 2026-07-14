@@ -1,6 +1,7 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { TokenService } from '../../../../core/services/token/token';
+import { AdminService } from '../../../../features/admin/data-access/admin.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -12,12 +13,17 @@ import { TokenService } from '../../../../core/services/token/token';
 export class Sidebar implements OnInit {
   private router = inject(Router);
   private tokenService = inject(TokenService);
+  private adminService = inject(AdminService);
 
   // Variables reactivas (Signals) que tu HTML original espera
   menuItems = signal<any[]>([]);
   nombreUsuario = signal<string>('Usuario');
   rolUsuario = signal<string>('Desconocido');
   iniciales = signal<string>('U');
+
+  // Contador de empresas pendientes de verificación, mostrado como badge junto
+  // a "Gestión de Usuarios" (solo aplica para el rol ADMIN).
+  empresasPendientes = signal<number>(0);
 
   ngOnInit(): void {
     // El rol y el nombre visible se leen directamente del JWT (decodificado en TokenService),
@@ -50,10 +56,18 @@ export class Sidebar implements OnInit {
     } else if (rol.includes('ADMIN')) {
       this.menuItems.set([
         { label: 'Panel de Control', icon: 'pi pi-sliders-h', route: '/dashboard/admin' },
-        { label: 'Gestión de Usuarios', icon: 'pi pi-users', route: '/dashboard/admin/usuarios' },
+        { label: 'Gestión de Usuarios', icon: 'pi pi-users', route: '/dashboard/admin/usuarios', badgeKey: 'empresasPendientes' },
         { label: 'Mensajes de Contacto', icon: 'pi pi-envelope', route: '/dashboard/admin/mensajes' }
       ]);
+      this.cargarEmpresasPendientes();
     }
+  }
+
+  private cargarEmpresasPendientes(): void {
+    this.adminService.contarEmpresasPendientes().subscribe({
+      next: (count) => this.empresasPendientes.set(count),
+      error: () => this.empresasPendientes.set(0)
+    });
   }
 
   logout(): void {

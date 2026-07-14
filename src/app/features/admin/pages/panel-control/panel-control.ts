@@ -39,7 +39,7 @@ export class PanelControl implements OnInit {
   cargarDatos(): void {
     this.loading.set(true);
 
-    this.adminService.listarUsuarios(0, 500).subscribe({
+    this.adminService.listarUsuarios({ page: 0, size: 500 }).subscribe({
       next: (res) => this.usuarios.set(res.content),
       error: () => this.usuarios.set([])
     });

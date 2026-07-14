@@ -36,12 +36,29 @@ textarea,
   width: 100%;
 }
 
-.p-password {
-  position: relative;
+// El grid de 2 columnas (md:grid-cols-2) usa tracks "auto" por defecto, que se
+// expanden al max-content del elemento más ancho. Sin min-width: 0 en la celda,
+// el <p-password> puede forzar la columna a crecer y desbordar en desktop.
+.form-group {
+  min-width: 0;
 }
 
-.p-password .p-password-input {
+// <p-password> es un elemento custom de Angular: por defecto el navegador lo
+// trata como "display: inline", por lo que "width: 100%" no surte efecto y su
+// ancho depende del contenido interno, provocando el desborde. Se usa
+// ::ng-deep porque el input real vive dentro de la vista interna del
+// componente PrimeNG (fuera del alcance de la encapsulación de este componente).
+:host ::ng-deep .p-password {
+  position: relative;
+  display: flex;
   width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+:host ::ng-deep .p-password .p-password-input {
+  width: 100%;
+  max-width: 100%;
   box-sizing: border-box;
   border-radius: 0.75rem;
   border: 1px solid #d1d5db;
@@ -54,7 +71,7 @@ textarea,
   min-height: 3rem;
 }
 
-.p-password .p-password-toggle-mask-icon {
+:host ::ng-deep .p-password .p-password-toggle-mask-icon {
   color: #6b7280;
   cursor: pointer;
 

@@ -34,6 +34,10 @@
 .table-toolbar {
   padding: 1.2rem 1.4rem;
   border-bottom: 1px solid #f1f5f9;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
 
   .search-input {
     width: 320px;
@@ -43,6 +47,66 @@
 
     &:focus { border-color: #0f3d56 !important; }
   }
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  .filter-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #64748b;
+    white-space: nowrap;
+  }
+}
+
+:host ::ng-deep .filter-select {
+  min-width: 170px;
+
+  &.p-select {
+    border-radius: 10px !important;
+    border-color: #e2e8f0 !important;
+    min-height: 2.4rem;
+  }
+}
+
+.cell-sin-accion {
+  color: #cbd5e1;
+  font-size: 0.85rem;
+}
+
+// Tabs (PrimeNG v20 "Tabs" API: p-tabs / p-tablist / p-tab / p-tabpanels).
+:host ::ng-deep {
+  .p-tablist {
+    margin-bottom: 1.2rem;
+  }
+
+  .p-tab {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #64748b;
+    gap: 8px;
+
+    &.p-tab-active {
+      color: #1e5f74;
+    }
+  }
+
+  .p-tablist-active-bar {
+    background: #1e5f74 !important;
+  }
+}
+
+.tab-badge {
+  margin-left: 6px;
+  background: #fee2e2;
+  color: #b91c1c;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 1px 7px;
+  border-radius: 999px;
 }
 
 .skeleton-wrap {

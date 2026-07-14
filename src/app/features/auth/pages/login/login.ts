@@ -99,6 +99,16 @@ export class Login {
           return;
         }
 
+        // Empresa registrada pero todavía no verificada por un administrador
+        // (código específico "COMPANY_NOT_VERIFIED" que devuelve el backend con 403).
+        if (err.error?.code === 'COMPANY_NOT_VERIFIED') {
+          this.messageService.showWarn(
+            'Tu cuenta de empresa aún está en proceso de revisión por un administrador. Te notificaremos cuando pueda acceder al sistema.',
+            6000
+          );
+          return;
+        }
+
         const errorMsg = err.error?.message || 'Credenciales incorrectas o problema de comunicación con el servidor.';
         this.messageService.showError(errorMsg);
       }
