@@ -15,6 +15,20 @@ export interface PostulantePerfil {
   linkedin?: string | null;
 }
 
+// Currículum estructurado de un candidato, tal como lo expone GET /api/cv/{id}.
+// Lo usa la empresa para "Ver CV" desde la tabla de postulantes.
+export interface CurriculumVitaeDetalle {
+  id: number;
+  tituloProfesional?: string | null;
+  descripcion?: string | null;
+  experiencia?: string | null;
+  habilidades?: string | null;
+  educacion?: string | null;
+  telefono?: string | null;
+  linkedin?: string | null;
+  nombreUsuario?: string | null;
+}
+
 export interface PostulantePerfilUpdate {
   nombre: string;
   apellido: string;

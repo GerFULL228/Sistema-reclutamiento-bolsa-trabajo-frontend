@@ -25,7 +25,14 @@
 
       <div class="p-10">
         <div class="mb-6">
-          <button type="button" class="btn btn-secondary" (click)="goBack()">Atrás</button>
+          <button
+            type="button"
+            pButton
+            label="Atrás"
+            icon="pi pi-arrow-left"
+            severity="secondary"
+            [outlined]="true"
+            (click)="goBack()"></button>
         </div>
         <form [formGroup]="postulanteForm" (ngSubmit)="registrar()" class="space-y-6">
 

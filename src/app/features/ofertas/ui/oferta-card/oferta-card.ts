@@ -33,4 +33,13 @@ export class OfertaCard {
       default: return this.oferta.estado;
     }
   }
+
+  get modalidadLabel(): string {
+    switch (this.oferta.modalidad) {
+      case 'PRESENCIAL': return 'Presencial';
+      case 'REMOTO': return 'Remoto';
+      case 'HIBRIDO': return 'Híbrido';
+      default: return this.oferta.modalidad || '';
+    }
+  }
 }

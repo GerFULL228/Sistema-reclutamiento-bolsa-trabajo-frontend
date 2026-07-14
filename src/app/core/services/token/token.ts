@@ -85,6 +85,12 @@ export class TokenService {
     return this.getDecodeToken()?.permisos || [];
   }
 
+  // Nombre visible del usuario logueado: el nombre comercial de la empresa
+  // o el nombre completo del postulante, según lo resuelva el backend en el JWT.
+  getNombre(): string {
+    return this.getDecodeToken()?.nombre || '';
+  }
+
   getHomeByRole(): string {
     const roles = this.getRoles();
 

@@ -13,6 +13,7 @@ export interface PostulacionResponse {
   ofertaTitulo: string;
   nombreEmpresa?: string;
   cvUrl?: string;
+  curriculumId?: number;
   estado: string;
   fechaPostulacion: string;
 }

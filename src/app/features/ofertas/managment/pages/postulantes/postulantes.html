@@ -53,6 +53,10 @@
                 <a [href]="postulacion.cvUrl" target="_blank" class="cv-link">
                   <i class="pi pi-file-pdf"></i> Ver CV
                 </a>
+              } @else if (postulacion.curriculumId) {
+                <a class="cv-link" (click)="verCv(postulacion)">
+                  <i class="pi pi-id-card"></i> Ver CV
+                </a>
               } @else {
                 <span class="no-cv">Sin CV</span>
               }
@@ -72,6 +76,7 @@
                   [ngModel]="postulacion.estado"
                   (ngModelChange)="cambiarEstado(postulacion, $event)"
                   [disabled]="actualizandoId === postulacion.id"
+                  appendTo="body"
                   styleClass="estado-select" />
               }
             </td>
@@ -93,4 +98,50 @@
     }
 
   </div>
+
+  <p-dialog
+    header="Currículum del candidato"
+    [(visible)]="cvDialogVisible"
+    [modal]="true"
+    [style]="{ width: '32rem' }"
+    styleClass="cv-dialog">
+    @if (cargandoCv) {
+      <p class="cv-cargando"><i class="pi pi-spin pi-spinner"></i> Cargando CV...</p>
+    } @else if (cvSeleccionado) {
+      <div class="cv-detalle">
+        @if (cvSeleccionado.tituloProfesional) {
+          <h3>{{ cvSeleccionado.tituloProfesional }}</h3>
+        }
+        @if (cvSeleccionado.descripcion) {
+          <p class="cv-descripcion">{{ cvSeleccionado.descripcion }}</p>
+        }
+        @if (cvSeleccionado.experiencia) {
+          <div class="cv-seccion">
+            <span class="cv-label">Experiencia</span>
+            <p>{{ cvSeleccionado.experiencia }}</p>
+          </div>
+        }
+        @if (cvSeleccionado.educacion) {
+          <div class="cv-seccion">
+            <span class="cv-label">Educación</span>
+            <p>{{ cvSeleccionado.educacion }}</p>
+          </div>
+        }
+        @if (cvSeleccionado.habilidades) {
+          <div class="cv-seccion">
+            <span class="cv-label">Habilidades</span>
+            <p>{{ cvSeleccionado.habilidades }}</p>
+          </div>
+        }
+        <div class="cv-contacto">
+          @if (cvSeleccionado.telefono) {
+            <span><i class="pi pi-phone"></i> {{ cvSeleccionado.telefono }}</span>
+          }
+          @if (cvSeleccionado.linkedin) {
+            <a [href]="cvSeleccionado.linkedin" target="_blank"><i class="pi pi-linkedin"></i> LinkedIn</a>
+          }
+        </div>
+      </div>
+    }
+  </p-dialog>
 </div>

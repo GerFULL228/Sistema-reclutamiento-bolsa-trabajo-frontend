@@ -52,17 +52,10 @@ export class Login {
         this.loading = false;
         this.messageService.showSuccess('¡Inicio de sesión correcto!');
 
-        const userRole = res.rol || res.role || res.usuario?.rol?.nombre || (res.roles ? res.roles[0] : null);
+        const userRole = res.rol || res.role || (res.roles ? res.roles[0] : null);
         const roleUpper = userRole ? userRole.toUpperCase() : '';
-
-        // NUEVO: Guardamos el rol en el almacenamiento local para uso global de la UI
-        localStorage.setItem('user_role', roleUpper);
-        const userName = res.usuario?.nombre ? `${res.usuario.nombre} ${res.usuario.apellido || ''}` : 'Usuario';
-        localStorage.setItem('user_name', userName.trim());
-        // También guardamos el ID del usuario o de la empresa/postulante si tu back lo manda, útil para las peticiones
-        if (res.usuario?.id) {
-          localStorage.setItem('user_id', res.usuario.id);
-        }
+        // El rol y el nombre visible para la UI (sidebar) se leen directamente
+        // del JWT (claims "roles" y "nombre"), no es necesario duplicarlos aquí.
 
         if (roleUpper.includes('POSTULANTE') || roleUpper.includes('EMPRESA') || roleUpper.includes('ADMIN')) {
           this.router.navigate(['/dashboard']);

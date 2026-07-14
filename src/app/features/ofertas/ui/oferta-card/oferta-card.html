@@ -28,7 +28,9 @@
     </div>
 
     <div class="footer">
-      <span class="tag">Remoto</span>
+      @if (modalidadLabel) {
+        <span class="tag">{{ modalidadLabel }}</span>
+      }
       <span class="fecha">Ver detalle →</span>
     </div>
 

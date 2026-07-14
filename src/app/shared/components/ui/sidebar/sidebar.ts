@@ -20,10 +20,12 @@ export class Sidebar implements OnInit {
   iniciales = signal<string>('U');
 
   ngOnInit(): void {
-    // Leemos los datos que guardamos en el login
-    const rol = localStorage.getItem('user_role') || 'POSTULANTE'; // Valor por defecto por si acaso
-    const nombre = localStorage.getItem('user_name') || 'Juan Perez'; // Nombre temporal si no hay
-    
+    // El rol y el nombre visible se leen directamente del JWT (decodificado en TokenService),
+    // así siempre reflejan al usuario realmente autenticado, incluso tras recargar la página.
+    const rolConPrefijo = this.tokenService.getRoles()[0] || 'ROLE_POSTULANTE';
+    const rol = rolConPrefijo.replace('ROLE_', '');
+    const nombre = this.tokenService.getNombre() || 'Usuario';
+
     // Seteamos las variables del UI
     this.rolUsuario.set(rol);
     this.nombreUsuario.set(nombre);
@@ -57,8 +59,6 @@ export class Sidebar implements OnInit {
     // Limpia tokens en localStorage y también el signal de permisos en memoria,
     // evitando que queden datos de la sesión anterior si otro usuario inicia sesión después.
     this.tokenService.clearTokens();
-    localStorage.removeItem('user_role');
-    localStorage.removeItem('user_name');
     this.router.navigate(['/auth/login']);
   }
 }

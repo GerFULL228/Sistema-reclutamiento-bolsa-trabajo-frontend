@@ -9,11 +9,14 @@ import { TagModule } from 'primeng/tag';
 import { SelectModule } from 'primeng/select';
 import { SkeletonModule } from 'primeng/skeleton';
 import { ToastModule } from 'primeng/toast';
+import { DialogModule } from 'primeng/dialog';
 
 import { PostulacionService } from '../../../../postulaciones/data-access/postulacion.service';
 import { PostulacionResponse } from '../../../../postulaciones/data-access/postulacion.model';
 import { OfertaService } from '../../../data-access/oferta.service';
 import { MessageServices } from '../../../../../core/services/messages/message-service';
+import { PostulantePerfilService } from '../../../../postulantes/data-access/postulante-perfil.service';
+import { CurriculumVitaeDetalle } from '../../../../postulantes/data-access/postulante-perfil.model';
 
 @Component({
   selector: 'app-postulantes',
@@ -28,6 +31,7 @@ import { MessageServices } from '../../../../../core/services/messages/message-s
     SelectModule,
     SkeletonModule,
     ToastModule,
+    DialogModule,
   ],
   templateUrl: './postulantes.html',
   styleUrl: './postulantes.scss',
@@ -38,6 +42,7 @@ export class Postulantes implements OnInit {
   private router = inject(Router);
   private postulacionService = inject(PostulacionService);
   private ofertaService = inject(OfertaService);
+  private postulantePerfilService = inject(PostulantePerfilService);
   private messageService = inject(MessageServices);
 
   ofertaId!: number;
@@ -46,6 +51,11 @@ export class Postulantes implements OnInit {
   actualizandoId: number | null = null;
 
   postulaciones: PostulacionResponse[] = [];
+
+  // Modal "Ver CV" (currículum estructurado del candidato)
+  cvDialogVisible = false;
+  cargandoCv = false;
+  cvSeleccionado: CurriculumVitaeDetalle | null = null;
 
   estadosDisponibles = [
     { label: 'Enviado', value: 'ENVIADO' },
@@ -103,6 +113,26 @@ export class Postulantes implements OnInit {
 
   volver(): void {
     this.router.navigate(['/dashboard/jobs']);
+  }
+
+  verCv(postulacion: PostulacionResponse): void {
+    if (!postulacion.curriculumId) return;
+
+    this.cvDialogVisible = true;
+    this.cargandoCv = true;
+    this.cvSeleccionado = null;
+
+    this.postulantePerfilService.obtenerCvPorId(postulacion.curriculumId).subscribe({
+      next: (cv) => {
+        this.cvSeleccionado = cv;
+        this.cargandoCv = false;
+      },
+      error: () => {
+        this.cargandoCv = false;
+        this.cvDialogVisible = false;
+        this.messageService.showError('No se pudo cargar el CV del candidato.');
+      }
+    });
   }
 
   getSeverity(estado: string): 'success' | 'danger' | 'warn' | 'info' | 'secondary' {
