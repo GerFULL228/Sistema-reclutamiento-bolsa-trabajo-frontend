@@ -7,11 +7,12 @@
         <p class="text-gray-500 text-sm mt-1">Encuentra el empleo que mejor se adapte a ti.</p>
       </div>
       <div class="w-full md:w-1/3 flex gap-2">
-        <!-- <input pInputText type="text" placeholder="Cargo o palabra clave" [(ngModel)]="criterioBusqueda" 
-               class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none" (keyup.enter)="filtrarEmpleos()"/>
-        <button class="text-white px-4 py-2 rounded-lg font-semibold" style="background-color: #1e5f74;" (click)="filtrarEmpleos()">
+        <input type="text" placeholder="Busca por cargo o empresa"
+               [ngModel]="criterioBusqueda()" (ngModelChange)="filtrarEmpleos($event)"
+               class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none"/>
+        <button class="text-white px-4 py-2 rounded-lg font-semibold" style="background-color: #1e5f74;" type="button">
           <i class="pi pi-search"></i>
-        </button> -->
+        </button>
       </div>
     </div>
 
@@ -21,7 +22,7 @@
       </div>
     } @else {
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        @for (job of ofertas(); track job.id) {
+        @for (job of ofertasFiltradas(); track job.id) {
           
             <app-oferta-card [oferta]="job"></app-oferta-card>
           

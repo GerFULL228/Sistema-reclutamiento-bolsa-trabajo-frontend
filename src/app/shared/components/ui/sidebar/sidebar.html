@@ -11,13 +11,15 @@ Hub</span>
   <span class="section-label">Principal</span>
 
   @for (item of menuItems(); track item.route) {
-    
+
      <a [routerLink]="item.route"
       routerLinkActive="active"
       class="nav-item">
       <i [class]="item.icon"></i>
       {{ item.label }}
-     
+      @if (item.badgeKey === 'empresasPendientes' && empresasPendientes() > 0) {
+        <span class="nav-badge">{{ empresasPendientes() }}</span>
+      }
     </a>
   }
 

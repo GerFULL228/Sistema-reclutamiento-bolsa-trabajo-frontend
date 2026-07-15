@@ -1,29 +1,41 @@
 <div class="page">
 
- 
-  <div class="page-header">
+  <p-toast />
+
+ <div class="page-header">
     <div class="page-title">
       <h1>Ofertas laborales</h1>
       <p>Gestiona las ofertas publicadas por tu empresa</p>
     </div>
-    <button pButton label="Nueva oferta" icon="pi pi-plus" class="btn-primary"></button>
+    <button pButton label="Nueva oferta" icon="pi pi-plus" class="btn-primary" (click)="irACrear()"></button>
   </div>
 
 
-  <div class="metrics">
-    <div class="metric-card">
-      <span class="metric-label">Total ofertas</span>
-      <span class="metric-value">{{ ofertas().length }}</span>
+  @if (loading()) {
+    <div class="metrics">
+      @for (i of [1,2,3]; track i) {
+        <div class="metric-card">
+          <p-skeleton width="60%" height="14px" styleClass="mb-2" />
+          <p-skeleton width="40%" height="28px" />
+        </div>
+      }
     </div>
-    <div class="metric-card activas">
-      <span class="metric-label">Activas</span>
-      <span class="metric-value">{{ totalActivas() }}</span>
+  } @else {
+    <div class="metrics">
+      <div class="metric-card">
+        <span class="metric-label">Total ofertas</span>
+        <span class="metric-value">{{ ofertas().length }}</span>
+      </div>
+      <div class="metric-card activas">
+        <span class="metric-label">Activas</span>
+        <span class="metric-value">{{ totalActivas() }}</span>
+      </div>
+      <div class="metric-card cerradas">
+        <span class="metric-label">Cerradas</span>
+        <span class="metric-value">{{ totalCerradas() }}</span>
+      </div>
     </div>
-    <div class="metric-card cerradas">
-      <span class="metric-label">Cerradas</span>
-      <span class="metric-value">{{ totalCerradas() }}</span>
-    </div>
-  </div>
+  }
 
 
   <div class="table-card">
@@ -53,6 +65,7 @@
         [rowsPerPageOptions]="[8, 15, 30]"
         [showCurrentPageReport]="true"
         currentPageReportTemplate="{first}–{last} de {totalRecords} ofertas"
+        paginatorDropdownAppendTo="body"
         styleClass="p-datatable-sm custom-table"
         [rowHover]="true"
         dataKey="id">
@@ -94,23 +107,33 @@
               <span class="cell-salario">S/ {{ oferta.salario | number }}</span>
             </td>
             <td>
-              <span class="tag-modalidad">Remoto</span>
+              <span class="tag-modalidad">{{ getModalidadLabel(oferta.modalidad) }}</span>
             </td>
             <td>
-              <p-tag
-                [value]="oferta.estado ? 'Activa' : 'Cerrada'"
-                [severity]="getSeverity(oferta.estado)" />
+              <select
+                class="estado-select"
+                [class.is-activa]="oferta.estado === 'ACTIVA'"
+                [class.is-cerrada]="oferta.estado === 'CERRADA'"
+                [class.is-pausada]="oferta.estado === 'PAUSADA'"
+                [value]="oferta.estado"
+                [disabled]="cambiandoEstadoId === oferta.id"
+                (change)="cambiarEstado(oferta, $event)">
+                @for (op of estadosDisponibles; track op.value) {
+                  <option [value]="op.value">{{ op.label }}</option>
+                }
+              </select>
             </td>
             <td>
               <div class="cell-actions">
                 <button
                   pButton
-                  icon="pi pi-eye"
+                  icon="pi pi-users"
                   [text]="true"
                   [rounded]="true"
                   severity="secondary"
-                  pTooltip="Ver detalle"
-                  tooltipPosition="top"></button>
+                  pTooltip="Ver postulantes"
+                  tooltipPosition="top"
+                  (click)="verPostulantes(oferta.id)"></button>
                 <button
                   pButton
                   icon="pi pi-pencil"
@@ -118,15 +141,18 @@
                   [rounded]="true"
                   severity="secondary"
                   pTooltip="Editar"
-                  tooltipPosition="top"></button>
+                  tooltipPosition="top"
+                  (click)="editar(oferta.id)"></button>
                 <button
                   pButton
                   icon="pi pi-trash"
                   [text]="true"
                   [rounded]="true"
                   severity="danger"
+                  [loading]="eliminandoId === oferta.id"
                   pTooltip="Eliminar"
-                  tooltipPosition="top"></button>
+                  tooltipPosition="top"
+                  (click)="eliminar(oferta.id)"></button>
               </div>
             </td>
           </tr>

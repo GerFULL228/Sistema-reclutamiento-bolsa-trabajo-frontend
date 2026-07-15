@@ -51,7 +51,16 @@ export class Home  {
 
 
   searchJobs() {
-    
+    const queryParams: Record<string, string> = {};
+
+    if (this.searchPosition.trim()) {
+      queryParams['cargo'] = this.searchPosition.trim();
+    }
+    if (this.searchLocation.trim()) {
+      queryParams['ubicacion'] = this.searchLocation.trim();
+    }
+
+    this.router.navigate(['/empleos'], { queryParams });
   }
 
   searchByTag(tag: string) {
@@ -64,6 +73,6 @@ export class Home  {
   }
 
   registerNow() {
-    this.router.navigate(['/registro']); 
+    this.router.navigate(['/auth/register']);
   }
 }

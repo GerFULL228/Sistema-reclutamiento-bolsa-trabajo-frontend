@@ -38,37 +38,81 @@ export class Login {
 
 
   login() {
-    this.loading = true;
     if (this.loginForm.invalid) {
-      this.loading = false;
       this.loginForm.markAllAsTouched();
-      this.messageService.showError('Por favor, complete todos los campos correctamente.');
-
+      this.messageService.showError('Por favor, ingresa credenciales válidas.');
       return;
     }
 
-    this.authService.login(this.loginForm.getRawValue())
-      .subscribe({
-        next: (res) => {
-          const returnUrl = this.route.snapshot.queryParams['returnUrl'];
+    this.loading = true;
+    const credentials = this.loginForm.getRawValue();
 
-          const home = this.tokenService.getHomeByRole();
+    this.authService.login(credentials).subscribe({
+      next: (res: any) => {
+        this.loading = false;
+        this.messageService.showSuccess('¡Inicio de sesión correcto!');
 
-          this.router.navigate([returnUrl || home], {
-            replaceUrl: true
-          });
-          this.loading = false;
-          console.log('Login successful:', res);
+        const userRole = res.rol || res.role || (res.roles ? res.roles[0] : null);
+        const roleUpper = userRole ? userRole.toUpperCase() : '';
+        // El rol y el nombre visible para la UI (sidebar) se leen directamente
+        // del JWT (claims "roles" y "nombre"), no es necesario duplicarlos aquí.
 
-
-        },
-        error: (err) => {
-          this.errorMessage = err.error?.message || 'Error de conexion con el servidor';
-          this.loading = false;
-          this.messageService.showError(this.errorMessage);
+        if (roleUpper.includes('POSTULANTE') || roleUpper.includes('EMPRESA') || roleUpper.includes('ADMIN')) {
+          this.router.navigate(['/dashboard']);
+        } else {
+          this.messageService.showWarn('Rol desconocido. Redirigiendo al inicio...');
+          this.router.navigate(['/']);
         }
-      });
 
+
+        /*
+        if (roleUpper.includes('POSTULANTE')) {
+          this.router.navigate(['/dashboard-postulante']);
+        } else if (roleUpper.includes('EMPRESA')) {
+          this.router.navigate(['/company-dashboard']);   
+        } else if (roleUpper.includes('ADMIN')) {
+          this.router.navigate(['/dashboard-admin']);
+        } else {
+      
+          this.router.navigate(['/']);
+        }*/
+
+
+      },
+      error: (err) => {
+        this.loading = false;
+        console.error('Error en el Login:', err);
+
+        // Cuenta deshabilitada por un administrador (código específico "ACCOUNT_DISABLED"
+        // que devuelve el backend con 403): mostramos el mensaje exacto solicitado y
+        // redirigimos automáticamente a /contacto para que el usuario pueda escribirnos.
+        if (err.error?.code === 'ACCOUNT_DISABLED') {
+          this.messageService.showError(
+            'Hola, tu cuenta ha sido deshabilitada por un administrador. Por favor contáctate con nosotros si crees que es un error.',
+            5000
+          );
+
+          setTimeout(() => {
+            this.router.navigate(['/contacto']);
+          }, 4000);
+
+          return;
+        }
+
+        // Empresa registrada pero todavía no verificada por un administrador
+        // (código específico "COMPANY_NOT_VERIFIED" que devuelve el backend con 403).
+        if (err.error?.code === 'COMPANY_NOT_VERIFIED') {
+          this.messageService.showWarn(
+            'Tu cuenta de empresa aún está en proceso de revisión por un administrador. Te notificaremos cuando pueda acceder al sistema.',
+            6000
+          );
+          return;
+        }
+
+        const errorMsg = err.error?.message || 'Credenciales incorrectas o problema de comunicación con el servidor.';
+        this.messageService.showError(errorMsg);
+      }
+    });
   }
 
 

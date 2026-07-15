@@ -12,10 +12,15 @@ export const OFERTAS_MANAGMENT_ROUTE: Routes = [
         loadComponent: () =>
             import('./pages/create/create').then((p) => p.Create)
     },
-    // {
-    //     path: 'edit/:id',
-    //     loadComponent: () =>
-    //         import('./pages/edit/edit').then((p) => p.Edit)
-    // }
-    
+    {
+        path: 'edit/:id',
+        loadComponent: () =>
+            import('./pages/edit/edit').then((p) => p.Edit)
+    },
+    {
+        path: ':id/postulantes',
+        loadComponent: () =>
+            import('./pages/postulantes/postulantes').then((p) => p.Postulantes)
+    }
+
 ]

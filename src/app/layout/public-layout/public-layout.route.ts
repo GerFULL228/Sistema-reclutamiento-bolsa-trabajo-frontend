@@ -1,5 +1,6 @@
 import { Routes } from "@angular/router"
 import { PublicLayout } from "./public-layout"
+import { noAuthGuard } from "../../core/guards/no-auth-guard"
 
 
 export const PUBLIC_LAYOUT_ROUTE:Routes = [
@@ -12,6 +13,8 @@ export const PUBLIC_LAYOUT_ROUTE:Routes = [
         children: [
           {
             path: 'home',
+            // Si ya hay sesión iniciada, se prioriza el dashboard sobre la landing pública.
+            canActivate: [noAuthGuard],
             loadComponent : () => import('../../features/public/pages/home/home').then(p=>p.Home)
           },
           {

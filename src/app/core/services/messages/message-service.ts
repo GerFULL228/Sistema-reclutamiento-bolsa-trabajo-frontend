@@ -13,12 +13,12 @@ export class MessageServices {
         this.messageService.add({ severity: 'info', summary: 'Info', detail });
     }
 
-    showWarn(detail: string) {
-        this.messageService.add({ severity: 'warn', summary: 'Warn', detail });
+    showWarn(detail: string, life?: number) {
+        this.messageService.add({ severity: 'warn', summary: 'Warn', detail, life });
     }
 
-    showError(detail: string) {
-        this.messageService.add({ severity: 'error', summary: 'Error', detail });
+    showError(detail: string, life?: number) {
+        this.messageService.add({ severity: 'error', summary: 'Error', detail, life });
     }
 
     showContrast(detail: string) {
@@ -28,8 +28,8 @@ export class MessageServices {
     showSecondary(detail: string) {
         this.messageService.add({ severity: 'secondary', summary: 'Secondary', detail });
     }
-    showSuccess(detail:string){
-        this.messageService.add({severity: 'success', summary: 'success', detail})
+    showSuccess(detail: string, life?: number) {
+        this.messageService.add({ severity: 'success', summary: 'success', detail, life });
     }
   
 }

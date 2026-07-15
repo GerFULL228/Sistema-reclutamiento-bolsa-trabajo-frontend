@@ -1,7 +1,7 @@
 
 export interface LoginResponse{
     accessToken:string;
-    resfreshToken:string;
+    refreshToken:string;
     tokenType:string;
     expiresIn: number;
     email: string;

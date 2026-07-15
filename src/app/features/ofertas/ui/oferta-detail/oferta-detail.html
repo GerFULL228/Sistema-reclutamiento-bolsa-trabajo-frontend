@@ -18,11 +18,9 @@
 
     <span
       class="estado"
-      [class.activo]="oferta.estado"
-      [class.cerrado]="!oferta.estado">
-
-      {{ oferta.estado ? 'Activa' : 'Cerrada' }}
-
+      [class.activo]="isActiva"
+      [class.cerrado]="!isActiva">
+      {{ estadoLabel }}
     </span>
 
   </div>
